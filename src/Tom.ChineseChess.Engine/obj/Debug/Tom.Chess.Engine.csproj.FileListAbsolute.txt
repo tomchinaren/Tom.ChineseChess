@@ -1,5 +1,0 @@
-F:\git\github\tom\Tom.Chess\src\Tom.Chess.Engine\bin\Debug\Tom.Chess.Engine.dll
-F:\git\github\tom\Tom.Chess\src\Tom.Chess.Engine\bin\Debug\Tom.Chess.Engine.pdb
-F:\git\github\tom\Tom.Chess\src\Tom.Chess.Engine\obj\Debug\Tom.Chess.Engine.csprojResolveAssemblyReference.cache
-F:\git\github\tom\Tom.Chess\src\Tom.Chess.Engine\obj\Debug\Tom.Chess.Engine.dll
-F:\git\github\tom\Tom.Chess\src\Tom.Chess.Engine\obj\Debug\Tom.Chess.Engine.pdb
