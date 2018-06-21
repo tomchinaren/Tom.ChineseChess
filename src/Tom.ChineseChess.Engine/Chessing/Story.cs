@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tom.ChineseChess.Engine.Chessing;
 using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
@@ -12,7 +13,7 @@ namespace Tom.ChineseChess.Engine
     {
         public void Run()
         {
-            //stories
+            //stories:square do event, then table response
             //tom and jerry is square
             //tom and jerry sit at table 1
             //tom ready
@@ -25,25 +26,24 @@ namespace Tom.ChineseChess.Engine
             //end while
 
 
-            ISquare tom = null;
-            ISquare jerry = null;
-            ITable table = null;
-            IChessing chessing = null;
+            ISquare tom = new Square( ChessColor.Red);
+            ISquare jerry = new Square(ChessColor.Black);
+            ITable table = new ChessBoard();
 
             tom.Sit(table);
             jerry.Sit(table);
             tom.Ready();
-            chessing.Clear();
+            table.Clear();
             jerry.Ready();
-            chessing.Start();
+            table.Start();
             IChess cannon = tom.GetChess(ChessType.Cannons) ;
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
-            IChessPoint chessPoint = null;
+            IChessPoint chessPoint = new ChessPoint() { X = 5, Y = 2 };
             cannon.MoveTo(chessPoint);
             cannon2.MoveTo(chessPoint);
 
-            chessing.Stop();
-            chessing.Report();
+            table.Stop();
+            table.Report();
         }
 
         class SquareDemo : ISquare
@@ -77,10 +77,6 @@ namespace Tom.ChineseChess.Engine
         IChess GetChess(ChessType chessType, int index = 0);
     }
 
-    public interface ITable
-    {
-
-    }
     public interface IChess
     {
         ISquare Square { get; }
@@ -91,7 +87,7 @@ namespace Tom.ChineseChess.Engine
         int X { get; set; }
         int Y { get; set; }
     }
-    public interface IChessing
+    public interface ITable
     {
         void Start();
         void Stop();

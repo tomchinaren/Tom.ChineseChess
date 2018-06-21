@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tom.ChineseChess.Engine
 {
-    public class ChessBoard
+    public class ChessBoard: ITable
     {
         private Dictionary<IChessPoint, Chess> dict = new Dictionary<IChessPoint, Chess>();
 
@@ -33,5 +33,27 @@ namespace Tom.ChineseChess.Engine
                 return list;
             }
         }
+
+        #region ITable
+        void ITable.Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITable.Report()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITable.Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ITable.Stop()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

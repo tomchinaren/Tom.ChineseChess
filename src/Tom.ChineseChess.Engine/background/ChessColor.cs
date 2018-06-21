@@ -8,6 +8,7 @@ namespace Tom.ChineseChess.Engine
 {
     public enum ChessColor
     {
-        Red
+        Red,
+        Black
     }
 }
