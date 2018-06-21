@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tom.ChineseChess.Engine
 {
-    public class ChessPoint
+    public class ChessPoint: IChessPoint
     {
         public int X { get; set; }
         public int Y { get; set; }

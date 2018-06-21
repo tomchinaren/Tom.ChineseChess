@@ -18,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Knights(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public Knights(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             // 
         }
@@ -42,7 +42,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 马移动算法 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint p)
+        protected override bool CanMoveTo(IChessPoint p)
         {
             //蹩脚算法 
             //横向移动 

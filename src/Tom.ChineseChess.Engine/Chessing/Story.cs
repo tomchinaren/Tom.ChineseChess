@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -35,10 +36,11 @@ namespace Tom.ChineseChess.Engine
             chessing.Clear();
             jerry.Ready();
             chessing.Start();
-            IChess cannon = null;
+            IChess cannon = tom.GetChess(ChessType.Cannons) ;
+            IChess cannon2 = jerry.GetChess(ChessType.Cannons);
             IChessPoint chessPoint = null;
-            tom.MoveTo(cannon, chessPoint);
-            jerry.MoveTo(cannon, chessPoint);
+            cannon.MoveTo(chessPoint);
+            cannon2.MoveTo(chessPoint);
 
             chessing.Stop();
             chessing.Report();
@@ -46,6 +48,11 @@ namespace Tom.ChineseChess.Engine
 
         class SquareDemo : ISquare
         {
+            public IChess GetChess(ChessType chessType, int index = 0)
+            {
+                throw new NotImplementedException();
+            }
+
             public void MoveTo(IChess chess, IChessPoint chessPoint)
             {
                 Console.WriteLine("{0} {1} {2}", "MoveTo", chess.ToString(), chessPoint.ToString());
@@ -67,7 +74,7 @@ namespace Tom.ChineseChess.Engine
     {
         void Sit(ITable table);
         void Ready();
-        void MoveTo(IChess chess, IChessPoint chessPoint);
+        IChess GetChess(ChessType chessType, int index = 0);
     }
 
     public interface ITable
@@ -76,10 +83,13 @@ namespace Tom.ChineseChess.Engine
     }
     public interface IChess
     {
+        ISquare Square { get; }
+        void MoveTo(IChessPoint chessPoint);
     }
     public interface IChessPoint
     {
-
+        int X { get; set; }
+        int Y { get; set; }
     }
     public interface IChessing
     {

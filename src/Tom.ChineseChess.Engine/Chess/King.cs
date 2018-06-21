@@ -18,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public King(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public King(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             // 
         }
@@ -42,7 +42,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 将移动算法 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint tragPoint)
+        protected override bool CanMoveTo(IChessPoint tragPoint)
         {
             //“将”不能出城 
             if (!((tragPoint.X >= 3 && tragPoint.X <= 5) && (tragPoint.Y <= 2 || tragPoint.Y >= 7)))

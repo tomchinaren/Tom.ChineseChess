@@ -17,8 +17,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Cannons(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public Cannons(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             // 
         }
@@ -41,7 +41,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 棋子是否能够移动到目标点 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint targPoint)
+        protected override bool CanMoveTo(IChessPoint targPoint)
         {
             //两点在一条直线上 
             if (targPoint.X != _currentPoint.X && targPoint.Y != _currentPoint.Y)
@@ -58,6 +58,5 @@ namespace Tom.ChineseChess.Engine
             return true;
 
         }
-
     }
 }

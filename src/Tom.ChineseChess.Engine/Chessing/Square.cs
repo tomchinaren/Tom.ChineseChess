@@ -3,36 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tom.ChineseChess.Engine.Enums;
 
-namespace Tom.ChineseChess.Engine
+namespace Tom.ChineseChess.Engine.Chessing
 {
-    public class Square
+    public class Square : ISquare
     {
-        private string _name;
-        private List<Chess> _chessList;
-        private int _state;
-        public int State
+        ChessColor _color;
+        ChessBoard _board;
+        private List<IChess> _chessList;
+        private void GetInitChessList()
         {
-            get { return _state; }
+            _chessList = new List<Engine.IChess>();
+
+            _chessList.Add(new King(this,_color, new ChessPoint() { X = 0, Y = 5 }, _board));
+        }
+        public Square(ChessColor color)
+        {
+            _color = color;
+
+            GetInitChessList();
         }
 
-        public Square(string name) 
+        #region ISquare
+        IChess ISquare.GetChess(ChessType chessType, int index)
         {
-            _name = name;
+            throw new NotImplementedException();
         }
 
-        public void Sit(Table table)
+        void ISquare.Ready()
         {
-
-        }
-        public void Ready()
-        {
-
+            throw new NotImplementedException();
         }
 
-        public void Move()
+        void ISquare.Sit(ITable table)
         {
-
+            throw new NotImplementedException();
         }
+        #endregion
     }
 }

@@ -8,9 +8,9 @@ namespace Tom.ChineseChess.Engine
 {
     public class ChessBoard
     {
-        private Dictionary<ChessPoint, Chess> dict = new Dictionary<ChessPoint, Chess>();
+        private Dictionary<IChessPoint, Chess> dict = new Dictionary<IChessPoint, Chess>();
 
-        public Chess this[ChessPoint chessPoint]
+        public Chess this[IChessPoint chessPoint]
         {
             get { return dict[chessPoint]; }
             set { dict[chessPoint] = value; }

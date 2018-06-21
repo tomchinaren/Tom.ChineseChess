@@ -22,15 +22,15 @@ namespace Tom.ChineseChess.ConsoleTest
             //board start
 
 
-            var red = new Square("tom");
-            var black = new Square("jerry");
-            var table = new Table();
+            //var red = new Square("tom");
+            //var black = new Square("jerry");
+            //var table = new Table();
 
-            var ing = new Chessing("tom vs jerry at 2018.6.20 17:40");
+            //var ing = new Chessing("tom vs jerry at 2018.6.20 17:40");
 
-            table.StartChessing(ing);
+            //table.StartChessing(ing);
 
-            ing.Start(true);//at red
+            //ing.Start(true);//at red
 
 
         }

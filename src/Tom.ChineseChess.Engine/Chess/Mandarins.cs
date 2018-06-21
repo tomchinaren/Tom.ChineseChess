@@ -17,8 +17,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Mandarins(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public Mandarins(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             // 
         }
@@ -41,7 +41,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 兵移动算法 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint tragPoint)
+        protected override bool CanMoveTo(IChessPoint tragPoint)
         {
             //“士”不能出城 
             if (!((tragPoint.X >= 3 && tragPoint.X <= 5) && (tragPoint.Y <= 2 || tragPoint.Y >= 7)))

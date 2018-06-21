@@ -44,15 +44,13 @@
     <Compile Include="background\GameLoseException.cs" />
     <Compile Include="background\ImageHelper.cs" />
     <Compile Include="background\Res.cs" />
-    <Compile Include="Chessing\Chessing.cs" />
     <Compile Include="Chessing\Square.cs" />
     <Compile Include="Chessing\Story.cs" />
-    <Compile Include="Chessing\Table.cs" />
     <Compile Include="Chess\Cannons.cs" />
-    <Compile Include="Chess\Chess.cs" />
     <Compile Include="background\ChessBoard.cs" />
     <Compile Include="background\ChessColor.cs" />
     <Compile Include="background\ChessPoint.cs" />
+    <Compile Include="Chess\Chess.cs" />
     <Compile Include="Chess\Elephants.cs" />
     <Compile Include="Chess\King.cs" />
     <Compile Include="Chess\Knights.cs" />

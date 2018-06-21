@@ -17,8 +17,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Rooks(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public Rooks(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             // 
         }
@@ -41,7 +41,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 棋子是否能够移动到目标点 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint targetPoint)
+        protected override bool CanMoveTo(IChessPoint targetPoint)
         {
             //两点在一条直线上 
             if (targetPoint.X != _currentPoint.X && targetPoint.Y != _currentPoint.Y)

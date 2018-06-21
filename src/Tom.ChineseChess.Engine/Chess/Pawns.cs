@@ -22,8 +22,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Pawns(ChessColor color, ChessPoint tragPoint, ChessBoard board)
-        : base(color, tragPoint, board)
+        public Pawns(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        : base(square, color, tragPoint, board)
         {
             if (_currentPoint.Y > 4)
                 _step = -1;
@@ -49,7 +49,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 兵移动算法 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint p)
+        protected override bool CanMoveTo(IChessPoint p)
         {
             //兵不能往后走 
             if (p.Y - _currentPoint.Y == -_step)

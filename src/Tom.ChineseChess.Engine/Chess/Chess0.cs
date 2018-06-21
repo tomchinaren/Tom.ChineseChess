@@ -1,18 +1,32 @@
-﻿using System;
+﻿//1.棋子基类
+//抽象类, 是所有棋子的基类, 注意几个重要的方法:如CanMoveTo移动算法及MoveTo移动棋子。
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using Tom.ChineseChess.Engine;
 
 namespace Tom.ChineseChess.Engine
 {
-    public abstract class Chess : IChess
+    /// <summary> 
+    /// 棋子类 
+    /// </summary> 
+    public abstract class Chess
     {
-        protected ChessBoard _chessboard;
-        private ISquare _square;
         protected ChessColor _color;
-        protected IChessPoint _currentPoint;
+        protected ChessPoint _currentPoint;
+        protected ChessBoard _chessboard;
+
+        /// <summary> 
+        /// 构造函数 
+        /// </summary> 
+        public Chess(ChessColor color, ChessPoint tragpoint, ChessBoard board)
+        {
+            this._color = color;
+            this._currentPoint = tragpoint;
+            this._chessboard = board;
+        }
+
         /// <summary> 
         /// 棋子颜色 
         /// </summary> 
@@ -21,39 +35,44 @@ namespace Tom.ChineseChess.Engine
             get { return _color; }
             set { _color = value; }
         }
+
         /// <summary> 
         /// 当前坐标 
         /// </summary> 
-        public IChessPoint CurrentPoint
+        public ChessPoint CurrentPoint
         {
             get { return _currentPoint; }
             set { _currentPoint = value; }
         }
-        public Chess(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        {
-            _square = square;
-            this._color = color;
-            this._currentPoint = tragPoint;
-            this._chessboard = board;
-        }
-
 
         /// <summary> 
-        /// 是否能够移动 
+        /// 棋盘 
         /// </summary> 
-        protected abstract bool CanMoveTo(IChessPoint p);
+        public ChessBoard Chessboard
+        {
+            get { return _chessboard; }
+            set { _chessboard = value; }
+        }
+
         /// <summary> 
         /// 棋子图片:抽象的属性 
         /// </summary> 
         public abstract Image ChessImage { get; }
 
-        #region IChess
-        public ISquare Square { get { return _square; } }
-        void IChess.MoveTo(IChessPoint targetPoint)
+        /// <summary> 
+        /// 是否能够移动 
+        /// </summary> 
+        protected abstract bool CanMoveTo(ChessPoint p);
+
+        /// <summary> 
+        /// 移动方法 
+        /// </summary> 
+        public void MoveTo(ChessPoint targetPoint)
         {
             //目标棋子和当前棋子颜色不能一致 
             Chess targetChess = _chessboard[targetPoint];
-            if (targetChess != null && targetChess.Square == this.Square) return;
+
+            if (targetChess != null && targetChess.Color == this._color) return;
 
             //是否满足规则 
             if (!CanMoveTo(targetPoint)) return;
@@ -68,12 +87,11 @@ namespace Tom.ChineseChess.Engine
 
             this._currentPoint = targetPoint;
         }
-        #endregion
 
         /// <summary> 
         /// 获取两点之间的棋子数 
         /// </summary> 
-        public int GetChessCount(IChessPoint start, IChessPoint end)
+        public int GetChessCount(ChessPoint start, ChessPoint end)
         {
             //如果Y相同 
             if (start.Y == end.Y)
@@ -105,5 +123,6 @@ namespace Tom.ChineseChess.Engine
                 return count;
             }
         }
+
     }
 }

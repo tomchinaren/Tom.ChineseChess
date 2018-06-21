@@ -17,8 +17,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Elephants(ChessColor color, ChessPoint p, ChessBoard board)
-        : base(color, p, board)
+        public Elephants(ISquare square, ChessColor color, IChessPoint p, ChessBoard board)
+        : base(square, color, p, board)
         {
             // 
         }
@@ -41,7 +41,7 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 象移动算法 
         /// </summary> 
-        protected override bool CanMoveTo(ChessPoint p)
+        protected override bool CanMoveTo(IChessPoint p)
         {
             //绝对值法 
             if (Math.Abs(_currentPoint.X - p.X) != 2 || Math.Abs(_currentPoint.Y - p.Y) != 2)
