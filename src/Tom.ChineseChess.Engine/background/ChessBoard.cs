@@ -8,19 +8,20 @@ namespace Tom.ChineseChess.Engine
 {
     public class ChessBoard: ITable
     {
-        private Dictionary<IChessPoint, Chess> dict = new Dictionary<IChessPoint, Chess>();
+        private Dictionary<IChessPoint, IChess> dict = new Dictionary<IChessPoint, IChess>();
 
-        public Chess this[IChessPoint chessPoint]
+        #region ITable
+        IChess ITable.this[IChessPoint chessPoint]
         {
             get { return dict[chessPoint]; }
             set { dict[chessPoint] = value; }
         }
 
-        public List<Chess> this[int a, int b]
+        List<IChess> ITable.this[int a, int b]
         {
             get
             {
-                var list = new List<Chess>();
+                var list = new List<IChess>();
                 var keys = dict.Keys.Where(k => k.X == a && k.Y == b).ToArray();
                 foreach (var k in dict.Keys)
                 {
@@ -34,7 +35,6 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
-        #region ITable
         void ITable.Clear()
         {
             throw new NotImplementedException();

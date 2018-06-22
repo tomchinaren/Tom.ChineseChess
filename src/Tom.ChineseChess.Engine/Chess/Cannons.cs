@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -14,13 +15,20 @@ namespace Tom.ChineseChess.Engine
     /// </summary> 
     public class Cannons : Chess
     {
+
+
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Cannons(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        : base(square, color, tragPoint, board)
+        public Cannons(ISquare square, ChessColor color, ChessBoard board, int index)
+        : base(square, color, new ChessPoint(), board)
         {
             // 
+            if(index!=0 && index != 1)
+            {
+                throw new Exception("index error!");
+            }
+            _firstPoint = new ChessPoint() { X = 2, Y = 2 + index * 5 };
         }
 
         /// <summary> 
@@ -35,6 +43,15 @@ namespace Tom.ChineseChess.Engine
                     return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 3);
                 //黑炮 
                 return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 10);
+            }
+        }
+
+        private IChessPoint _firstPoint;
+        public override IChessPoint FirstPoint
+        {
+            get
+            {
+                return _firstPoint;
             }
         }
 

@@ -11,6 +11,9 @@ namespace Tom.ChineseChess.ConsoleTest
     {
         static void Main(string[] args)
         {
+
+            var demo = new StoryDemo();
+            demo.Run();
         }
 
         static void Demo()

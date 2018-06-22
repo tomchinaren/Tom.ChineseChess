@@ -18,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public King(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        : base(square, color, tragPoint, board)
+        public King(ISquare square, ChessColor color, ITable board)
+        : base(square, color, new ChessPoint() { X = square.Camp== Enums.Camp.RedCamp? 0:9, Y = 5 }, board)
         {
             // 
         }

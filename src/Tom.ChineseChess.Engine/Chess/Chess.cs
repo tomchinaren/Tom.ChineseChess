@@ -9,7 +9,7 @@ namespace Tom.ChineseChess.Engine
 {
     public abstract class Chess : IChess
     {
-        protected ChessBoard _chessboard;
+        protected ITable _chessboard;
         private ISquare _square;
         protected ChessColor _color;
         protected IChessPoint _currentPoint;
@@ -21,6 +21,10 @@ namespace Tom.ChineseChess.Engine
             get { return _color; }
             set { _color = value; }
         }
+        public abstract IChessPoint FirstPoint
+        {
+            get;
+        }
         /// <summary> 
         /// 当前坐标 
         /// </summary> 
@@ -29,11 +33,11 @@ namespace Tom.ChineseChess.Engine
             get { return _currentPoint; }
             set { _currentPoint = value; }
         }
-        public Chess(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
+        public Chess(ISquare square, ChessColor color, IChessPoint tragPoint, ITable board)
         {
             _square = square;
             this._color = color;
-            this._currentPoint = tragPoint;
+            this._currentPoint = FirstPoint;
             this._chessboard = board;
         }
 
@@ -52,7 +56,7 @@ namespace Tom.ChineseChess.Engine
         void IChess.MoveTo(IChessPoint targetPoint)
         {
             //目标棋子和当前棋子颜色不能一致 
-            Chess targetChess = _chessboard[targetPoint];
+            IChess targetChess = _chessboard[targetPoint];
             if (targetChess != null && targetChess.Square == this.Square) return;
 
             //是否满足规则 

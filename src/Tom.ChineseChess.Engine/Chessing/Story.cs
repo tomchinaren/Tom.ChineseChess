@@ -25,9 +25,8 @@ namespace Tom.ChineseChess.Engine
             //if kill king or give up then chessing stop and report
             //end while
 
-
-            ISquare tom = new Square( ChessColor.Red);
-            ISquare jerry = new Square(ChessColor.Black);
+            ISquare tom = new Square( Camp.RedCamp, ChessColor.Red);
+            ISquare jerry = new Square( Camp.BlackCamp, ChessColor.Black);
             ITable table = new ChessBoard();
 
             tom.Sit(table);
@@ -48,6 +47,14 @@ namespace Tom.ChineseChess.Engine
 
         class SquareDemo : ISquare
         {
+            Camp ISquare.Camp
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
             public IChess GetChess(ChessType chessType, int index = 0)
             {
                 throw new NotImplementedException();
@@ -67,11 +74,27 @@ namespace Tom.ChineseChess.Engine
             {
                 throw new NotImplementedException();
             }
+
+            IChess ISquare.GetChess(ChessType chessType, int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            void ISquare.Ready()
+            {
+                throw new NotImplementedException();
+            }
+
+            void ISquare.Sit(ITable table)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 
     public interface ISquare
     {
+        Camp Camp { get; }
         void Sit(ITable table);
         void Ready();
         IChess GetChess(ChessType chessType, int index = 0);
@@ -93,6 +116,10 @@ namespace Tom.ChineseChess.Engine
         void Stop();
         void Report();
         void Clear();
+
+        IChess this[IChessPoint chessPoint] { get; set; }
+        List<IChess> this[int a, int b] { get;}
+
     }
 
 }
