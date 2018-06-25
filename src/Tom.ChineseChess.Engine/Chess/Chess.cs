@@ -33,7 +33,7 @@ namespace Tom.ChineseChess.Engine
             get { return _currentPoint; }
             set { _currentPoint = value; }
         }
-        public Chess(ISquare square, ChessColor color, IChessPoint tragPoint, ITable board)
+        public Chess(ISquare square, ChessColor color, ITable board)
         {
             _square = square;
             this._color = color;

@@ -15,13 +15,20 @@ namespace Tom.ChineseChess.Engine
     /// </summary> 
     public class King : Chess
     {
+        private IChessPoint _firstPoint;
         /// <summary> 
         /// 构造函数 
         /// </summary> 
         public King(ISquare square, ChessColor color, ITable board)
-        : base(square, color, new ChessPoint() { X = square.Camp== Enums.Camp.RedCamp? 0:9, Y = 5 }, board)
+        : base(square, color, board)
         {
+            _firstPoint = new ChessPoint() { X = square.Camp == Enums.Camp.RedCamp ? 0 : 9, Y = 5 };
             // 
+        }
+
+        public override IChessPoint FirstPoint
+        {
+            get { return _firstPoint; }
         }
 
         /// <summary> 

@@ -109,6 +109,8 @@ namespace Tom.ChineseChess.Engine
     {
         int X { get; set; }
         int Y { get; set; }
+        public int RelativeX { get; set; }
+        public int RelativeY { get; set; }
     }
     public interface ITable
     {
