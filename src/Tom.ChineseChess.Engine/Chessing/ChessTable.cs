@@ -8,13 +8,13 @@ namespace Tom.ChineseChess.Engine
 {
     public class ChessTable: ITable
     {
-        private Dictionary<IChessPoint, IChess> dict = new Dictionary<IChessPoint, IChess>();
+        private Dictionary<IChessPoint, IChess> _dict = new Dictionary<IChessPoint, IChess>();
 
         #region ITable
         IChess ITable.this[IChessPoint chessPoint]
         {
-            get { return dict.ContainsKey(chessPoint) ? dict[chessPoint] : null; }
-            set { dict[chessPoint] = value; }
+            get { return _dict.ContainsKey(chessPoint) ? _dict[chessPoint] : null; }
+            set { _dict[chessPoint] = value; }
         }
 
         List<IChess> ITable.this[int a, int b]
@@ -22,10 +22,10 @@ namespace Tom.ChineseChess.Engine
             get
             {
                 var list = new List<IChess>();
-                var keys = dict.Keys.Where(k => k.X == a && k.Y == b).ToArray();
-                foreach (var k in dict.Keys)
+                var keys = _dict.Keys.Where(k => k.X == a && k.Y == b).ToArray();
+                foreach (var k in keys)
                 {
-                    list.Add(dict[k]);
+                    list.Add(_dict[k]);
                 }
                 if (list.Count == 0)
                 {

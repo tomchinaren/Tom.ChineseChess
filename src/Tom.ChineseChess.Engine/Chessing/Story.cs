@@ -37,8 +37,8 @@ namespace Tom.ChineseChess.Engine
             IChess cannon = tom.GetChess(ChessType.Cannons);
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
             var flag = false;
-            flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 2, 5));
-            flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 2, 5));
+            flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 2));
+            flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 4, 2));
 
             table.Stop();
             table.Report();

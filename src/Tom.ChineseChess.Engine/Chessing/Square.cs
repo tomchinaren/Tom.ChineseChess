@@ -68,24 +68,24 @@ namespace Tom.ChineseChess.Engine
         private List<Engine.IChess> GetInitChessList(Camp camp)
         {
             var list = new List<Engine.IChess>();
-            list.Add(new Rooks(this, new ChessPoint(camp,0, 0)));
-            list.Add(new Rooks(this, new ChessPoint(camp,0, 8)));
-            list.Add(new Knights(this, new ChessPoint(camp,0, 1)));
-            list.Add(new Knights(this, new ChessPoint(camp,0, 7)));
-            list.Add(new Elephants(this, new ChessPoint(camp,0, 2)));
-            list.Add(new Elephants(this, new ChessPoint(camp,0, 6)));
-            list.Add(new Mandarins(this, new ChessPoint(camp,0, 3)));
-            list.Add(new Mandarins(this, new ChessPoint(camp,0, 5)));
-            list.Add(new King(this, new ChessPoint(camp,0, 4)));
+            list.Add(new Rooks(this, new ChessPoint(camp, 0, 0)));
+            list.Add(new Rooks(this, new ChessPoint(camp, 8, 0)));
+            list.Add(new Knights(this, new ChessPoint(camp, 1, 0)));
+            list.Add(new Knights(this, new ChessPoint(camp, 7, 0)));
+            list.Add(new Elephants(this, new ChessPoint(camp, 2, 0)));
+            list.Add(new Elephants(this, new ChessPoint(camp, 6, 0)));
+            list.Add(new Mandarins(this, new ChessPoint(camp, 3, 0)));
+            list.Add(new Mandarins(this, new ChessPoint(camp, 5, 0)));
+            list.Add(new King(this, new ChessPoint(camp, 4, 0)));
 
-            list.Add(new Cannons(this, new ChessPoint(camp,2, 1)));
-            list.Add(new Cannons(this, new ChessPoint(camp,2, 7)));
+            list.Add(new Cannons(this, new ChessPoint(camp, 1, 2)));
+            list.Add(new Cannons(this, new ChessPoint(camp, 7, 2)));
 
-            list.Add(new Pawns(this, new ChessPoint(camp,3, 0)));
-            list.Add(new Pawns(this, new ChessPoint(camp,3, 2)));
-            list.Add(new Pawns(this, new ChessPoint(camp,3, 4)));
-            list.Add(new Pawns(this, new ChessPoint(camp,3, 6)));
-            list.Add(new Pawns(this, new ChessPoint(camp,3, 8)));
+            list.Add(new Pawns(this, new ChessPoint(camp, 0, 3)));
+            list.Add(new Pawns(this, new ChessPoint(camp, 2, 3)));
+            list.Add(new Pawns(this, new ChessPoint(camp, 4, 3)));
+            list.Add(new Pawns(this, new ChessPoint(camp, 6, 3)));
+            list.Add(new Pawns(this, new ChessPoint(camp, 8, 3)));
 
             return list;
         }
