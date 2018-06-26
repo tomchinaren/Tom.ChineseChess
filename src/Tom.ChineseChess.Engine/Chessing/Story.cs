@@ -24,8 +24,8 @@ namespace Tom.ChineseChess.Engine
             //if kill king or give up then chessing stop and report
             //end while
 
-            ISquare tom = new Square( Camp.RedCamp, ChessColor.Red);
-            ISquare jerry = new Square( Camp.BlackCamp, ChessColor.Black);
+            ISquare tom = new Square(Camp.RedCamp, ChessColor.Red);
+            ISquare jerry = new Square(Camp.BlackCamp, ChessColor.Black);
             ITable table = new ChessTable();
 
             tom.Sit(table);
@@ -34,12 +34,11 @@ namespace Tom.ChineseChess.Engine
             table.Clear();
             jerry.Ready();
             table.Start();
-            IChess cannon = tom.GetChess(ChessType.Cannons) ;
+            IChess cannon = tom.GetChess(ChessType.Cannons);
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
-            IChessPoint chessPoint = new ChessPoint(2, 5) { X = 2, Y = 5 };
             var flag = false;
-            flag = cannon.MoveTo(chessPoint);
-            flag = cannon2.MoveTo(chessPoint);
+            flag = cannon.MoveTo(new ChessPoint(2, 5) { X = 2, Y = 5 });
+            flag = cannon2.MoveTo(new ChessPoint(2, 5) { X = 2, Y = 5 });
 
             table.Stop();
             table.Report();
