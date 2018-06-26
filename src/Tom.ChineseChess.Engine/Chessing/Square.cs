@@ -46,6 +46,20 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
+        ILog _logger;
+
+        ILog ISquare.Logger
+        {
+            get
+            {
+                return _logger;
+            }
+            set
+            {
+                _logger = value;
+            }
+        }
+
         public Square(Camp camp, ChessColor color)
         {
             _camp = camp;

@@ -26,22 +26,32 @@ namespace Tom.ChineseChess.Engine
 
             ISquare tom = new Square(Camp.RedCamp, ChessColor.Red);
             ISquare jerry = new Square(Camp.BlackCamp, ChessColor.Black);
+            tom.Logger = new LogDemo();
+            jerry.Logger = tom.Logger;
             ITable table = new ChessTable();
 
             tom.Sit(table);
             jerry.Sit(table);
             tom.Ready();
-            table.Clear();
+            //table.Clear();
             jerry.Ready();
-            table.Start();
+            //table.Start();
             IChess cannon = tom.GetChess(ChessType.Cannons);
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
             var flag = false;
             flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 2));
             flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 4, 2));
 
-            table.Stop();
-            table.Report();
+            //table.Stop();
+            //table.Report();
+        }
+
+        public class LogDemo : ILog
+        {
+            public void LogInfo(string msg)
+            {
+                Console.WriteLine(msg);
+            }
         }
 
     }
@@ -54,6 +64,7 @@ namespace Tom.ChineseChess.Engine
         void Sit(ITable table);
         void Ready();
         IChess GetChess(ChessType chessType, int index = 0);
+        ILog Logger { get; set; }
     }
 
     public interface IChess
@@ -79,6 +90,11 @@ namespace Tom.ChineseChess.Engine
         IChess this[IChessPoint chessPoint] { get; set; }
         List<IChess> this[int a, int b] { get;}
 
+    }
+
+    public interface ILog
+    {
+        void LogInfo(string msg);
     }
 
 }

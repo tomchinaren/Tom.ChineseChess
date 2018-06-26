@@ -37,7 +37,7 @@ namespace Tom.ChineseChess.Engine
 
         void ITable.Clear()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         void ITable.Report()
@@ -47,7 +47,7 @@ namespace Tom.ChineseChess.Engine
 
         void ITable.Start()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         void ITable.Stop()

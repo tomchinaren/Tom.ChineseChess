@@ -55,6 +55,21 @@ namespace Tom.ChineseChess.Engine
 
         bool IChess.MoveTo(IChessPoint targetPoint)
         {
+            var flag = PureMoveTo(targetPoint);
+            Log(targetPoint, flag);
+            return flag;
+        }
+        private void Log(IChessPoint targetPoint, bool flag)
+        {
+            if (_square.Logger == null)
+            {
+                return;
+            }
+            var msg = GetMoveMsg(this.Square.Camp, this.ChessType, _currentPoint.RelativeX, _currentPoint.RelativeY, targetPoint.X, targetPoint.Y, flag);
+            _square.Logger.LogInfo(msg);
+        }
+        bool PureMoveTo(IChessPoint targetPoint)
+        {
             //目标棋子和当前棋子颜色不能一致 
             IChess targetChess = Table[targetPoint];
             if (targetChess != null && targetChess.Square == this.Square) return false;
@@ -64,7 +79,10 @@ namespace Tom.ChineseChess.Engine
 
             //吃掉对方老王 
             if (Table[targetPoint] is King)
+            {
+                Log(targetPoint, true);
                 throw new GameLoseException(this.Color == ChessColor.Red ? "红方胜" : "黑方胜");
+            }
 
             //移动 
             Table[_currentPoint] = null; //吃掉棋子或移动棋子 
@@ -74,6 +92,26 @@ namespace Tom.ChineseChess.Engine
             return true;
         }
         #endregion
+
+        private string GetMoveMsg(Camp camp, ChessType chessType, int relativeX, int relativeY, int tRelativeX, int tRelativeY, bool flag)
+        {
+            var action = "";
+            if(tRelativeX == relativeX)
+            {
+                action = string.Format("{0}平{1} {2}", relativeY+1, tRelativeY + 1, flag);
+            }
+            else if(tRelativeX > relativeX)
+            {
+                action = string.Format("{0}进{1} {2}", relativeY + 1, tRelativeY + 1, flag);
+            }
+            else
+            {
+                action = string.Format("{0}退{1} {2}", relativeY + 1, tRelativeY + 1, flag);
+            }
+
+            var msg = string.Format("{0} {1} {2}", this.Square.Camp, this.ChessType, action);
+            return msg;
+        }
 
         /// <summary> 
         /// 获取两点之间的棋子数 
