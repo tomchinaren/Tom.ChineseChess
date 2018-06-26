@@ -45,60 +45,6 @@ namespace Tom.ChineseChess.Engine
             table.Report();
         }
 
-        class SquareDemo : ISquare
-        {
-            public ITable Table
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            Camp ISquare.Camp
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            public IChess GetChess(ChessType chessType, int index = 0)
-            {
-                throw new NotImplementedException();
-            }
-
-            public bool MoveTo(IChess chess, IChessPoint chessPoint)
-            {
-                Console.WriteLine("{0} {1} {2}", "MoveTo", chess.ToString(), chessPoint.ToString());
-                return true;
-            }
-
-            public void Ready()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Sit(ITable table)
-            {
-                throw new NotImplementedException();
-            }
-
-            IChess ISquare.GetChess(ChessType chessType, int index)
-            {
-                throw new NotImplementedException();
-            }
-
-            void ISquare.Ready()
-            {
-                throw new NotImplementedException();
-            }
-
-            void ISquare.Sit(ITable table)
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 
     public interface ISquare
