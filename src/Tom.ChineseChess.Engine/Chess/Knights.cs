@@ -6,6 +6,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Tom.ChineseChess.Engine.Util;
+using System.Linq;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -18,8 +21,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Knights(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        : base(square, color, tragPoint, board)
+        public Knights(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
             // 
         }
@@ -39,6 +42,14 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
+        public override ChessType ChessType
+        {
+            get
+            {
+                return ChessType.Knights;
+            }
+        }
+
         /// <summary> 
         /// 马移动算法 
         /// </summary> 
@@ -48,12 +59,12 @@ namespace Tom.ChineseChess.Engine
             //横向移动 
             if (Math.Abs(_currentPoint.X - p.X) == 2 && Math.Abs(_currentPoint.Y - p.Y) == 1)
             {
-                if (_chessboard[(_currentPoint.X + p.X) / 2, _currentPoint.Y] == null)
+                if (Table[(_currentPoint.X + p.X) / 2, _currentPoint.Y] == null)
                     return true;
             }
             if (Math.Abs(_currentPoint.X - p.X) == 1 && Math.Abs(_currentPoint.Y - p.Y) == 2)
             {
-                if (_chessboard[_currentPoint.X, (_currentPoint.Y + p.Y) / 2] == null)
+                if (Table[_currentPoint.X, (_currentPoint.Y + p.Y) / 2] == null)
                     return true;
             }
             return false;

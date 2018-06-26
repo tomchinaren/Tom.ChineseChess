@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Tom.ChineseChess.Engine.Enums;
 using Tom.ChineseChess.Engine.Util;
 
-namespace Tom.ChineseChess.Engine.Chessing
+namespace Tom.ChineseChess.Engine
 {
     public class Square : ISquare
     {
@@ -30,13 +30,12 @@ namespace Tom.ChineseChess.Engine.Chessing
             }
         }
 
-        public Square(Camp camp,ChessColor color)
+        public Square(Camp camp, ChessColor color)
         {
             _camp = camp;
             _color = color;
             InitFlow();
-            GetInitChessList();
-
+            _chessList = GetInitChessList(camp);
         }
 
         private void InitFlow()
@@ -50,17 +49,43 @@ namespace Tom.ChineseChess.Engine.Chessing
             _flow.AddState(SquareState.Started, SquareState.Stoped);
         }
 
-        private void GetInitChessList()
+        private List<Engine.IChess> GetInitChessList(Camp camp)
         {
-            _chessList = new List<Engine.IChess>();
+            var list = new List<Engine.IChess>();
+            list.Add(new Rooks(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 0))));
+            list.Add(new Rooks(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 8))));
+            list.Add(new Knights(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 1))));
+            list.Add(new Knights(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 7))));
+            list.Add(new Elephants(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 2))));
+            list.Add(new Elephants(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 6))));
+            list.Add(new Mandarins(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 3))));
+            list.Add(new Mandarins(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 5))));
+            list.Add(new King(this, _color, GetAbsolutePoint(camp, new ChessPoint(0, 4))));
 
-            _chessList.Add(new King(this, _color, _table));
+            list.Add(new Cannons(this, _color, GetAbsolutePoint(camp, new ChessPoint(2, 1))));
+            list.Add(new Cannons(this, _color, GetAbsolutePoint(camp, new ChessPoint(2, 7))));
+
+            list.Add(new Pawns(this, _color, GetAbsolutePoint(camp, new ChessPoint(3, 0))));
+            list.Add(new Pawns(this, _color, GetAbsolutePoint(camp, new ChessPoint(3, 2))));
+            list.Add(new Pawns(this, _color, GetAbsolutePoint(camp, new ChessPoint(3, 4))));
+            list.Add(new Pawns(this, _color, GetAbsolutePoint(camp, new ChessPoint(3, 6))));
+            list.Add(new Pawns(this, _color, GetAbsolutePoint(camp, new ChessPoint(3, 8))));
+
+            return list;
+        }
+
+        private IChessPoint GetAbsolutePoint(Camp camp, IChessPoint point)
+        {
+            point.X = camp == Camp.RedCamp ? point.RelativeX : 8 - point.RelativeX;
+            point.Y = camp == Camp.RedCamp ? point.RelativeY : 9 - point.RelativeY;
+            return point;
         }
 
         #region ISquare
         IChess ISquare.GetChess(ChessType chessType, int index)
         {
-            throw new NotImplementedException();
+            var list = _chessList.Where(t => t.ChessType == chessType).ToList();
+            return list[index];
         }
 
         void ISquare.Ready()

@@ -47,9 +47,9 @@
     <Compile Include="Chessing\Square.cs" />
     <Compile Include="Chessing\Story.cs" />
     <Compile Include="Chess\Cannons.cs" />
-    <Compile Include="background\ChessBoard.cs" />
+    <Compile Include="Chessing\ChessTable.cs" />
     <Compile Include="background\ChessColor.cs" />
-    <Compile Include="background\ChessPoint.cs" />
+    <Compile Include="Chessing\ChessPoint.cs" />
     <Compile Include="Chess\Chess.cs" />
     <Compile Include="Chess\Elephants.cs" />
     <Compile Include="Chess\King.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Chess\Rooks.cs" />
-    <Compile Include="Util\FirstPoint.cs" />
+    <Compile Include="Util\FirstPoints.cs" />
     <Compile Include="Util\Flow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

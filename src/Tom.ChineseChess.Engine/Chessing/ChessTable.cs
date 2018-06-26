@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Tom.ChineseChess.Engine
 {
-    public class ChessBoard: ITable
+    public class ChessTable: ITable
     {
         private Dictionary<IChessPoint, IChess> dict = new Dictionary<IChessPoint, IChess>();
 
         #region ITable
         IChess ITable.this[IChessPoint chessPoint]
         {
-            get { return dict[chessPoint]; }
+            get { return dict.ContainsKey(chessPoint) ? dict[chessPoint] : null; }
             set { dict[chessPoint] = value; }
         }
 
@@ -37,7 +37,7 @@ namespace Tom.ChineseChess.Engine
 
         void ITable.Clear()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         void ITable.Report()
@@ -47,7 +47,7 @@ namespace Tom.ChineseChess.Engine
 
         void ITable.Start()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         void ITable.Stop()

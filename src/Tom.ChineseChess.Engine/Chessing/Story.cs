@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tom.ChineseChess.Engine.Chessing;
 using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
@@ -27,7 +26,7 @@ namespace Tom.ChineseChess.Engine
 
             ISquare tom = new Square( Camp.RedCamp, ChessColor.Red);
             ISquare jerry = new Square( Camp.BlackCamp, ChessColor.Black);
-            ITable table = new ChessBoard();
+            ITable table = new ChessTable();
 
             tom.Sit(table);
             jerry.Sit(table);
@@ -37,9 +36,10 @@ namespace Tom.ChineseChess.Engine
             table.Start();
             IChess cannon = tom.GetChess(ChessType.Cannons) ;
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
-            IChessPoint chessPoint = new ChessPoint() { X = 5, Y = 2 };
-            cannon.MoveTo(chessPoint);
-            cannon2.MoveTo(chessPoint);
+            IChessPoint chessPoint = new ChessPoint(2, 5) { X = 2, Y = 5 };
+            var flag = false;
+            flag = cannon.MoveTo(chessPoint);
+            flag = cannon2.MoveTo(chessPoint);
 
             table.Stop();
             table.Report();
@@ -47,6 +47,14 @@ namespace Tom.ChineseChess.Engine
 
         class SquareDemo : ISquare
         {
+            public ITable Table
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
             Camp ISquare.Camp
             {
                 get
@@ -60,9 +68,10 @@ namespace Tom.ChineseChess.Engine
                 throw new NotImplementedException();
             }
 
-            public void MoveTo(IChess chess, IChessPoint chessPoint)
+            public bool MoveTo(IChess chess, IChessPoint chessPoint)
             {
                 Console.WriteLine("{0} {1} {2}", "MoveTo", chess.ToString(), chessPoint.ToString());
+                return true;
             }
 
             public void Ready()
@@ -95,6 +104,7 @@ namespace Tom.ChineseChess.Engine
     public interface ISquare
     {
         Camp Camp { get; }
+        ITable Table { get; }
         void Sit(ITable table);
         void Ready();
         IChess GetChess(ChessType chessType, int index = 0);
@@ -102,15 +112,16 @@ namespace Tom.ChineseChess.Engine
 
     public interface IChess
     {
+        ChessType ChessType { get; }
         ISquare Square { get; }
-        void MoveTo(IChessPoint chessPoint);
+        bool MoveTo(IChessPoint chessPoint);
     }
     public interface IChessPoint
     {
         int X { get; set; }
         int Y { get; set; }
-        public int RelativeX { get; set; }
-        public int RelativeY { get; set; }
+        int RelativeX { get; set; }
+        int RelativeY { get; set; }
     }
     public interface ITable
     {

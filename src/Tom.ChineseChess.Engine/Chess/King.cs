@@ -5,8 +5,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Tom.ChineseChess.Engine;
+using Tom.ChineseChess.Engine.Enums;
+using Tom.ChineseChess.Engine.Util;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -15,20 +18,12 @@ namespace Tom.ChineseChess.Engine
     /// </summary> 
     public class King : Chess
     {
-        private IChessPoint _firstPoint;
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public King(ISquare square, ChessColor color, ITable board)
-        : base(square, color, board)
+        public King(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
-            _firstPoint = new ChessPoint() { X = square.Camp == Enums.Camp.RedCamp ? 0 : 9, Y = 5 };
-            // 
-        }
-
-        public override IChessPoint FirstPoint
-        {
-            get { return _firstPoint; }
         }
 
         /// <summary> 
@@ -43,6 +38,14 @@ namespace Tom.ChineseChess.Engine
                     return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 4);
                 //黑将 
                 return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 11);
+            }
+        }
+
+        public override ChessType ChessType
+        {
+            get
+            {
+                return ChessType.King;
             }
         }
 

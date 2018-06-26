@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Tom.ChineseChess.Engine;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -22,8 +23,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Pawns(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        : base(square, color, tragPoint, board)
+        public Pawns(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
             if (_currentPoint.Y > 4)
                 _step = -1;
@@ -43,6 +44,14 @@ namespace Tom.ChineseChess.Engine
                     return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 7);
                 //黑卒 
                 return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 14);
+            }
+        }
+
+        public override ChessType ChessType
+        {
+            get
+            {
+                return ChessType.Mandarins;
             }
         }
 

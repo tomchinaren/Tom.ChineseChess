@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using Tom.ChineseChess.Engine.Enums;
+using Tom.ChineseChess.Engine.Util;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -15,20 +16,19 @@ namespace Tom.ChineseChess.Engine
     /// </summary> 
     public class Cannons : Chess
     {
-
-
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Cannons(ISquare square, ChessColor color, ChessBoard board, int index)
-        : base(square, color, new ChessPoint(), board)
+        public Cannons(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
-            // 
-            if(index!=0 && index != 1)
+        }
+        public override ChessType ChessType
+        {
+            get
             {
-                throw new Exception("index error!");
+                return ChessType.Cannons;
             }
-            _firstPoint = new ChessPoint() { X = 2, Y = 2 + index * 5 };
         }
 
         /// <summary> 
@@ -46,15 +46,6 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
-        private IChessPoint _firstPoint;
-        public override IChessPoint FirstPoint
-        {
-            get
-            {
-                return _firstPoint;
-            }
-        }
-
         /// <summary> 
         /// 棋子是否能够移动到目标点 
         /// </summary> 
@@ -65,11 +56,11 @@ namespace Tom.ChineseChess.Engine
                 return false;
 
             //目标点不为空,中间只能由一个棋子 
-            if (_chessboard[targPoint] != null && GetChessCount(_currentPoint, targPoint) != 1)
+            if (Table[targPoint] != null && GetChessCount(_currentPoint, targPoint) != 1)
                 return false;
 
             //目标点为空,中间不能有棋子 
-            if (_chessboard[targPoint] == null && GetChessCount(_currentPoint, targPoint) > 0)
+            if (Table[targPoint] == null && GetChessCount(_currentPoint, targPoint) > 0)
                 return false;
 
             return true;

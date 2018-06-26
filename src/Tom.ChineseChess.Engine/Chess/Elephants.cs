@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -17,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Elephants(ISquare square, ChessColor color, IChessPoint p, ChessBoard board)
-        : base(square, color, p, board)
+        public Elephants(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
             // 
         }
@@ -38,6 +39,14 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
+        public override ChessType ChessType
+        {
+            get
+            {
+                return ChessType.Elephants;
+            }
+        }
+
         /// <summary> 
         /// 象移动算法 
         /// </summary> 
@@ -48,7 +57,7 @@ namespace Tom.ChineseChess.Engine
                 return false;
 
             //中间不能有棋子 
-            if (_chessboard[(_currentPoint.X + p.X) / 2, (_currentPoint.Y + p.Y) / 2] != null)
+            if (Table[(_currentPoint.X + p.X) / 2, (_currentPoint.Y + p.Y) / 2] != null)
                 return false;
 
             //越界算法 

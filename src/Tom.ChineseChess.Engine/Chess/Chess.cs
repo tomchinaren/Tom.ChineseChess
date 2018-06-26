@@ -4,13 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
     public abstract class Chess : IChess
     {
-        protected ITable _chessboard;
         private ISquare _square;
+        protected ITable Table { get { return _square.Table; } }
         protected ChessColor _color;
         protected IChessPoint _currentPoint;
         /// <summary> 
@@ -21,10 +22,7 @@ namespace Tom.ChineseChess.Engine
             get { return _color; }
             set { _color = value; }
         }
-        public abstract IChessPoint FirstPoint
-        {
-            get;
-        }
+
         /// <summary> 
         /// 当前坐标 
         /// </summary> 
@@ -33,12 +31,11 @@ namespace Tom.ChineseChess.Engine
             get { return _currentPoint; }
             set { _currentPoint = value; }
         }
-        public Chess(ISquare square, ChessColor color, ITable board)
+        public Chess(ISquare square, ChessColor color, IChessPoint point)
         {
             _square = square;
             this._color = color;
-            this._currentPoint = FirstPoint;
-            this._chessboard = board;
+            this._currentPoint = point;
         }
 
 
@@ -53,24 +50,28 @@ namespace Tom.ChineseChess.Engine
 
         #region IChess
         public ISquare Square { get { return _square; } }
-        void IChess.MoveTo(IChessPoint targetPoint)
+
+        public abstract ChessType ChessType { get; }
+
+        bool IChess.MoveTo(IChessPoint targetPoint)
         {
             //目标棋子和当前棋子颜色不能一致 
-            IChess targetChess = _chessboard[targetPoint];
-            if (targetChess != null && targetChess.Square == this.Square) return;
+            IChess targetChess = Table[targetPoint];
+            if (targetChess != null && targetChess.Square == this.Square) return false;
 
             //是否满足规则 
-            if (!CanMoveTo(targetPoint)) return;
+            if (!CanMoveTo(targetPoint)) return false;
 
             //吃掉对方老王 
-            if (_chessboard[targetPoint] is King)
+            if (Table[targetPoint] is King)
                 throw new GameLoseException(this.Color == ChessColor.Red ? "红方胜" : "黑方胜");
 
             //移动 
-            _chessboard[_currentPoint] = null; //吃掉棋子或移动棋子 
-            _chessboard[targetPoint] = this;
+            Table[_currentPoint] = null; //吃掉棋子或移动棋子 
+            Table[targetPoint] = this;
 
             this._currentPoint = targetPoint;
+            return true;
         }
         #endregion
 
@@ -90,7 +91,7 @@ namespace Tom.ChineseChess.Engine
                 int count = 0;
                 for (int i = min + 1; i < max; i++)
                 {
-                    if (_chessboard[i, start.Y] != null)
+                    if (Table[i, start.Y] != null)
                         count++;
                 }
                 return count;
@@ -103,7 +104,7 @@ namespace Tom.ChineseChess.Engine
                 int count = 0;
                 for (int i = min + 1; i < max; i++)
                 {
-                    if (_chessboard[start.X, i] != null)
+                    if (Table[start.X, i] != null)
                         count++;
                 }
                 return count;

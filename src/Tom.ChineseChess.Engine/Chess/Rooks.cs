@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -17,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Rooks(ISquare square, ChessColor color, IChessPoint tragPoint, ChessBoard board)
-        : base(square, color, tragPoint, board)
+        public Rooks(ISquare square, ChessColor color, IChessPoint point)
+        : base(square, color, point)
         {
             // 
         }
@@ -35,6 +36,14 @@ namespace Tom.ChineseChess.Engine
                     return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 1);
                 else //黑车
                     return ImageHelper.GetImageByAverageIndex(ChineseChess.Res.Properties.Resources.xchess, 14, 8);
+            }
+        }
+
+        public override ChessType ChessType
+        {
+            get
+            {
+                return ChessType.Mandarins;
             }
         }
 

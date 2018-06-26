@@ -15,6 +15,7 @@ namespace Tom.ChineseChess.Engine.Util
         public Flow(T initState)
         {
             _curState = initState;
+            _dict = new Dictionary<T, List<T>>();
         }
 
         public void AddState(T fromState,T toState)
