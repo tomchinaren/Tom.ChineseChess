@@ -8,3 +8,4 @@ log
 *.pubxml
 .vs
 /source/.vs
+/src/.vs
