@@ -21,8 +21,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Knights(ISquare square, ChessColor color, IChessPoint point)
-        : base(square, color, point)
+        public Knights(ISquare square, IChessPoint point)
+        : base(square, point)
         {
             // 
         }

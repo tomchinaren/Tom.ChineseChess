@@ -18,8 +18,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Rooks(ISquare square, ChessColor color, IChessPoint point)
-        : base(square, color, point)
+        public Rooks(ISquare square, IChessPoint point)
+        : base(square, point)
         {
             // 
         }

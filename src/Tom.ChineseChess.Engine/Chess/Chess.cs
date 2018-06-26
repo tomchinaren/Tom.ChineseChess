@@ -31,10 +31,10 @@ namespace Tom.ChineseChess.Engine
             get { return _currentPoint; }
             set { _currentPoint = value; }
         }
-        public Chess(ISquare square, ChessColor color, IChessPoint point)
+        public Chess(ISquare square, IChessPoint point)
         {
             _square = square;
-            this._color = color;
+            this._color = square.Color;
             this._currentPoint = point;
         }
 

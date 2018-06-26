@@ -49,6 +49,7 @@ namespace Tom.ChineseChess.Engine
     public interface ISquare
     {
         Camp Camp { get; }
+        ChessColor Color { get; }
         ITable Table { get; }
         void Sit(ITable table);
         void Ready();

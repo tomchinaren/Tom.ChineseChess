@@ -19,8 +19,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Mandarins(ISquare square, ChessColor color, IChessPoint point)
-        : base(square, color, point)
+        public Mandarins(ISquare square, IChessPoint point)
+        : base(square, point)
         {
             // 
         }

@@ -23,8 +23,8 @@ namespace Tom.ChineseChess.Engine
         /// <summary> 
         /// 构造函数 
         /// </summary> 
-        public Pawns(ISquare square, ChessColor color, IChessPoint point)
-        : base(square, color, point)
+        public Pawns(ISquare square, IChessPoint point)
+        : base(square, point)
         {
             if (_currentPoint.Y > 4)
                 _step = -1;
