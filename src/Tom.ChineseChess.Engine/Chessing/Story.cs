@@ -32,6 +32,21 @@ namespace Tom.ChineseChess.Engine
 
             tom.Sit(table);
             jerry.Sit(table);
+
+            var i = 0;
+            Camp lastCamp = 0;
+            foreach(var t in table.ChessList)
+            {
+                if(lastCamp != t.Value.Square.Camp)
+                {
+                    i = 0;
+                    Console.WriteLine("-----------");
+                }
+                lastCamp = t.Value.Square.Camp;
+                Console.WriteLine("{0}) {1} {2} {3} {4} {5} {6}",i++, lastCamp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType);
+            }
+            Console.WriteLine("-----------");
+
             tom.Ready();
             //table.Clear();
             jerry.Ready();
@@ -39,8 +54,18 @@ namespace Tom.ChineseChess.Engine
             IChess cannon = tom.GetChess(ChessType.Cannons);
             IChess cannon2 = jerry.GetChess(ChessType.Cannons);
             var flag = false;
-            flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 2));
-            flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 4, 2));
+            try
+            {
+                flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 2));//2 5
+                flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 4, 2));// 2 5
+                flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 6));//5 j 4
+                flag = cannon2.MoveTo(new ChessPoint(cannon2.Square.Camp, 4, 1));// 2 5
+                flag = cannon.MoveTo(new ChessPoint(cannon.Square.Camp, 4, 9));//5 j 4
+            }
+            catch (GameLoseException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             //table.Stop();
             //table.Report();
@@ -71,6 +96,7 @@ namespace Tom.ChineseChess.Engine
     {
         ChessType ChessType { get; }
         ISquare Square { get; }
+        IChessPoint CurrentPoint { get; }
         bool MoveTo(IChessPoint chessPoint);
     }
     public interface IChessPoint
@@ -89,7 +115,7 @@ namespace Tom.ChineseChess.Engine
 
         IChess this[IChessPoint chessPoint] { get; set; }
         List<IChess> this[int a, int b] { get;}
-
+        Dictionary<IChessPoint, IChess> ChessList { get; }
     }
 
     public interface ILog

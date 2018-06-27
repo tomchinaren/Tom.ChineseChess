@@ -13,6 +13,7 @@ namespace Tom.ChineseChess.Engine
         private ISquare _square;
         protected ITable Table { get { return _square.Table; } }
         protected ChessColor _color;
+        protected IChessPoint _lastPoint;
         protected IChessPoint _currentPoint;
         /// <summary> 
         /// 棋子颜色 
@@ -29,7 +30,6 @@ namespace Tom.ChineseChess.Engine
         public IChessPoint CurrentPoint
         {
             get { return _currentPoint; }
-            set { _currentPoint = value; }
         }
         public Chess(ISquare square, IChessPoint point)
         {
@@ -56,16 +56,16 @@ namespace Tom.ChineseChess.Engine
         bool IChess.MoveTo(IChessPoint targetPoint)
         {
             var flag = PureMoveTo(targetPoint);
-            Log(targetPoint, flag);
+            Log(_lastPoint, targetPoint, flag);
             return flag;
         }
-        private void Log(IChessPoint targetPoint, bool flag)
+        private void Log(IChessPoint lastPoint, IChessPoint targetPoint, bool flag)
         {
             if (_square.Logger == null)
             {
                 return;
             }
-            var msg = GetMoveMsg(this.Square.Camp, this.ChessType, _currentPoint.RelativeX, _currentPoint.RelativeY, targetPoint.X, targetPoint.Y, flag);
+            var msg = GetMoveMsg(this.Square.Camp, this.ChessType, lastPoint.RelativeX, lastPoint.RelativeY, targetPoint.RelativeX, targetPoint.RelativeY, flag);
             _square.Logger.LogInfo(msg);
         }
         bool PureMoveTo(IChessPoint targetPoint)
@@ -80,7 +80,7 @@ namespace Tom.ChineseChess.Engine
             //吃掉对方老王 
             if (Table[targetPoint] is King)
             {
-                Log(targetPoint, true);
+                Log(_currentPoint, targetPoint, true);
                 throw new GameLoseException(this.Color == ChessColor.Red ? "红方胜" : "黑方胜");
             }
 
@@ -88,7 +88,8 @@ namespace Tom.ChineseChess.Engine
             Table[_currentPoint] = null; //吃掉棋子或移动棋子 
             Table[targetPoint] = this;
 
-            this._currentPoint = targetPoint;
+            _lastPoint = _currentPoint;
+            _currentPoint = targetPoint;
             return true;
         }
         #endregion
@@ -96,20 +97,34 @@ namespace Tom.ChineseChess.Engine
         private string GetMoveMsg(Camp camp, ChessType chessType, int relativeX, int relativeY, int tRelativeX, int tRelativeY, bool flag)
         {
             var action = "";
-            if(tRelativeX == relativeX)
+            if(tRelativeY == relativeY)
             {
-                action = string.Format("{0}平{1} {2}", relativeY+1, tRelativeY + 1, flag);
+                action = string.Format("{0}平{1} {2}", relativeX+1, tRelativeX + 1, flag);
             }
-            else if(tRelativeX > relativeX)
+            else if(tRelativeY > relativeY)
             {
-                action = string.Format("{0}进{1} {2}", relativeY + 1, tRelativeY + 1, flag);
+                if (chessType == ChessType.Knights || chessType == ChessType.Mandarins || chessType == ChessType.Elephants)
+                {
+                    action = string.Format("{0}进{1} {2}", relativeX + 1, tRelativeX +1, flag);
+                }
+                else
+                {
+                    action = string.Format("{0}进{1} {2}", relativeX + 1, tRelativeY - relativeY, flag);
+                }
             }
             else
             {
-                action = string.Format("{0}退{1} {2}", relativeY + 1, tRelativeY + 1, flag);
+                if (chessType == ChessType.Knights || chessType == ChessType.Mandarins || chessType == ChessType.Elephants)
+                {
+                    action = string.Format("{0}退{1} {2}", relativeX + 1, tRelativeX + 1, flag);
+                }
+                else
+                {
+                    action = string.Format("{0}退{1} {2}", relativeX + 1, relativeY - tRelativeY, flag);
+                }
             }
 
-            var msg = string.Format("{0} {1} {2}", this.Square.Camp, this.ChessType, action);
+            var msg = string.Format("{0} {1} {2}", camp, chessType, action);
             return msg;
         }
 

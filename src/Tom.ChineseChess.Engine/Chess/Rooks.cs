@@ -43,7 +43,7 @@ namespace Tom.ChineseChess.Engine
         {
             get
             {
-                return ChessType.Mandarins;
+                return ChessType.Rooks;
             }
         }
 

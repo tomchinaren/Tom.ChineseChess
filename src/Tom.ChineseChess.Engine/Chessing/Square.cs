@@ -118,8 +118,13 @@ namespace Tom.ChineseChess.Engine
 
         void ISquare.Sit(ITable table)
         {
-            _table = table;
             _flow.Next(SquareState.Sited);
+            _table = table;
+
+            foreach(var chess in _chessList)
+            {
+                table[chess.CurrentPoint] = chess;
+            }
         }
         #endregion
     }

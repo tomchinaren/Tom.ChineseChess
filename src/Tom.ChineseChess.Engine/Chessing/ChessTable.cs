@@ -13,8 +13,23 @@ namespace Tom.ChineseChess.Engine
         #region ITable
         IChess ITable.this[IChessPoint chessPoint]
         {
-            get { return _dict.ContainsKey(chessPoint) ? _dict[chessPoint] : null; }
-            set { _dict[chessPoint] = value; }
+            get
+            {
+                var key = _dict.Keys.FirstOrDefault(k => k.X == chessPoint.X && k.Y == chessPoint.Y);
+                return key!=null ? _dict[key] : null;
+            }
+            set
+            {
+                var key = _dict.Keys.FirstOrDefault(k => k.X == chessPoint.X && k.Y == chessPoint.Y);
+
+                key = key != null ? key : chessPoint;
+                _dict[key] = value;
+
+                if (value == null)//吃掉或移动
+                {
+                    _dict.Remove(key);
+                }
+            }
         }
 
         List<IChess> ITable.this[int a, int b]
@@ -32,6 +47,14 @@ namespace Tom.ChineseChess.Engine
                     return null;
                 }
                 return list;
+            }
+        }
+
+        Dictionary<IChessPoint, IChess> ITable.ChessList
+        {
+            get
+            {
+                return _dict;
             }
         }
 
