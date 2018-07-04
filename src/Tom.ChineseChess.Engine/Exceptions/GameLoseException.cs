@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tom.ChineseChess.Engine
+namespace Tom.ChineseChess.Engine.Exceptions
 {
     class GameLoseException : Exception
     {

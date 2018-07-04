@@ -126,6 +126,7 @@ namespace Tom.ChineseChess.Engine
                 table[chess.CurrentPoint] = chess;
             }
         }
+
         #endregion
     }
 }

@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\ChessMoveRequest.cs" />
+    <Compile Include="Request\SquareReadyRequest.cs" />
     <Compile Include="Request\SquareSitRequest.cs" />
+    <Compile Include="Response\ChessMoveResponse.cs" />
+    <Compile Include="Response\SquareReadyResponse.cs" />
     <Compile Include="Response\SquareSitResponse.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>

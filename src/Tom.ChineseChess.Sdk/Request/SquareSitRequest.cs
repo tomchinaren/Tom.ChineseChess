@@ -18,7 +18,7 @@ namespace Tom.ChineseChess.Sdk.Request
 
         public string GetApiName()
         {
-            return "tom.chineseChess.square.sit";
+            return "tom.chinesechess.chessing.sit";
         }
 
         public string GetApiVersion()

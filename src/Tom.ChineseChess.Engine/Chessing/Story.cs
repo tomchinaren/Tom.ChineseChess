@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tom.ChineseChess.Engine.Enums;
+using Tom.ChineseChess.Engine.Exceptions;
 
 namespace Tom.ChineseChess.Engine
 {
@@ -79,6 +80,12 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
+    }
+
+    public interface IChessContext
+    {
+        Dictionary<long, ITable> Tables { get; }
+        Dictionary<long, ISquare> Squares { get; }
     }
 
     public interface ISquare
