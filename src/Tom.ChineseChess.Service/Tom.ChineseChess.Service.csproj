@@ -60,10 +60,6 @@
       <Project>{872bee4c-c59e-49d3-821f-fb214d6667fd}</Project>
       <Name>Tom.ChineseChess.Engine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tom.ChineseChess.Enum\Tom.ChineseChess.Enum.csproj">
-      <Project>{32d05e7a-c0b0-4158-bd07-5134bf47d5b8}</Project>
-      <Name>Tom.ChineseChess.Enum</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Tom.ChineseChess.Sdk\Tom.ChineseChess.Sdk.csproj">
       <Project>{8A4F0B21-C593-4B9C-AE96-E7C5AC60FC4B}</Project>
       <Name>Tom.ChineseChess.Sdk</Name>

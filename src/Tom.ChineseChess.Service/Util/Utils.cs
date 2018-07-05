@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Tom.Api.Enum;
 using Tom.Api.Response;
 using Tom.ChineseChess.Engine.Exceptions;
-using Tom.ChineseChess.Enum;
 
 namespace Tom.ChineseChess.Service.Util
 {

@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tom.ChineseChess.Sdk", "Tom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tom.ChineseChess.Api.HostWeb", "Tom.ChineseChess.Api.HostWeb\Tom.ChineseChess.Api.HostWeb.csproj", "{342179E9-4506-4077-B931-FD4736A74FAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tom.ChineseChess.Enum", "Tom.ChineseChess.Enum\Tom.ChineseChess.Enum.csproj", "{32D05E7A-C0B0-4158-BD07-5134BF47D5B8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tom.ChineseChess.Service", "Tom.ChineseChess.Service\Tom.ChineseChess.Service.csproj", "{7F95C9B6-B567-4CE6-BDC1-23CD1B758DFB}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{342179E9-4506-4077-B931-FD4736A74FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{342179E9-4506-4077-B931-FD4736A74FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{342179E9-4506-4077-B931-FD4736A74FAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32D05E7A-C0B0-4158-BD07-5134BF47D5B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32D05E7A-C0B0-4158-BD07-5134BF47D5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32D05E7A-C0B0-4158-BD07-5134BF47D5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32D05E7A-C0B0-4158-BD07-5134BF47D5B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F95C9B6-B567-4CE6-BDC1-23CD1B758DFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F95C9B6-B567-4CE6-BDC1-23CD1B758DFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F95C9B6-B567-4CE6-BDC1-23CD1B758DFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
