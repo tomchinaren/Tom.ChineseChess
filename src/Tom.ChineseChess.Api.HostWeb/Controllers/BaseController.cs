@@ -16,7 +16,7 @@ namespace Tom.ChineseChess.Api.HostWeb.Controllers
     /// 2、获取用户身份
     /// </summary>
     [CheckToken]
-    public class BaseController : ApiController, IIdentity
+    public class BaseController : ApiController
     {
         public IIdentityContext Identity { get; set; }
     }

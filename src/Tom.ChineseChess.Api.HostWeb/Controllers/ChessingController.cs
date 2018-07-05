@@ -10,28 +10,29 @@ namespace Tom.ChineseChess.Api.HostWeb.Controllers
     {
         #region 初始化
         private static ChessingService service;
-        static ChessingController()
+        public ChessingController()
         {
             service = new ChessingService();
         }
         #endregion
 
         [HttpPost]
-        public SquareSitResponse Sit(SquareSitRequest request)
+        public SquareSitResponse Sit(SquareSitRequest request=null)
         {
-            return Utils.TryGetResponse(request, service.Sit);
+            return Utils.TryGetResponse(request, service.Sit, service, service.ChessContext);
         }
 
         [HttpPost]
         public SquareReadyResponse Ready(SquareReadyRequest request)
         {
-            return Utils.TryGetResponse(request, service.Ready);
+            return Utils.TryGetResponse(request, service.Ready, service, service.ChessContext);
         }
 
         [HttpPost]
         public ChessMoveResponse Move(ChessMoveRequest request)
         {
-            return Utils.TryGetResponse(request, service.Move);
+            return Utils.TryGetResponse(request, service.Move, service, service.ChessContext);
         }
+
     }
 }

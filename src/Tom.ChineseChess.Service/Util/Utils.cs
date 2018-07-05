@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Tom.Api.Enum;
+using Tom.Api.Request;
 using Tom.Api.Response;
+using Tom.ChineseChess.Engine;
 using Tom.ChineseChess.Engine.Exceptions;
+using Tom.ChineseChess.Sdk.Request;
+using Tom.ChineseChess.Service.Context;
 
 namespace Tom.ChineseChess.Service.Util
 {
@@ -64,14 +70,23 @@ namespace Tom.ChineseChess.Service.Util
             return val;
         }
 
-        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn,TOut> func) where TOut: IResponse
+        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn,TOut> func, ISetIdentity identitySetter, IChessContext chessContext)
+            where TOut: IResponse 
+            where TIn: IRequest<TOut>
         {
             var res = Activator.CreateInstance<TOut>();
             try
             {
+                var userID = GetUserIDByToken(request.Session);
+                var square = chessContext.Squares[userID];
+                var identity = new IdentityContext(square, null);
+                identitySetter.SetIdentity(identity);
+
                 res = func(request);
+
+                SetDebugInfo(request, res, square);
             }
-            catch(ChessException ex)
+            catch (ChessException ex)
             {
                 res.Code = ex.Code;
                 res.Msg = ex.Message;
@@ -83,6 +98,39 @@ namespace Tom.ChineseChess.Service.Util
             }
 
             return res;
+        }
+
+        public static void SetDebugInfo<T>(IRequest<T> request, T response, ISquare square) where T: IResponse
+        {
+            if (request.Debug)
+            {
+                response.DebugInfo = GetChessListDebugInfo(square);
+            }
+        }
+
+        public static string GetChessListDebugInfo(ISquare square)
+        {
+            var sb = new StringBuilder();
+            sb.Append(string.Format("-----begin Camp {0}-----", square.Camp));
+
+            var i = 0;
+            var list = square.Table.ChessList.Where(t => t.Value.Square == square);
+            foreach (var t in list)
+            {
+                Console.WriteLine("{0}) {1} {2} {3} {4} {5} {6}", i++, square.Camp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType);
+            }
+            sb.Append(string.Format("-----end Camp {0}-----", square.Camp));
+            return sb.ToString();
+        }
+
+        public static long GetUserIDByToken(string token)
+        {
+            long userID;
+            if (!long.TryParse(token, out userID))
+            {
+                throw new Exception("token param error!");
+            }
+            return userID;
         }
     }
 }

@@ -34,19 +34,8 @@ namespace Tom.ChineseChess.Engine
             tom.Sit(table);
             jerry.Sit(table);
 
-            var i = 0;
-            Camp lastCamp = 0;
-            foreach(var t in table.ChessList)
-            {
-                if(lastCamp != t.Value.Square.Camp)
-                {
-                    i = 0;
-                    Console.WriteLine("-----------");
-                }
-                lastCamp = t.Value.Square.Camp;
-                Console.WriteLine("{0}) {1} {2} {3} {4} {5} {6}",i++, lastCamp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType);
-            }
-            Console.WriteLine("-----------");
+            Show(tom);
+            Show(jerry);
 
             tom.Ready();
             //table.Clear();
@@ -70,6 +59,17 @@ namespace Tom.ChineseChess.Engine
 
             //table.Stop();
             //table.Report();
+        }
+
+        public void Show(ISquare square)
+        {
+            Console.WriteLine("-----{0}------", square.Camp);
+            var i = 0;
+            var list = square.Table.ChessList.Where(t => t.Value.Square == square);
+            foreach (var t in list)
+            {
+                Console.WriteLine("{0}) {1} {2} {3} {4} {5} {6}", i++, square.Camp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType);
+            }
         }
 
         public class LogDemo : ILog

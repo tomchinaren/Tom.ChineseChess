@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tom.Api.Request;
+﻿using Tom.Api.Request;
 
 namespace Tom.ChineseChess.Sdk
 {
@@ -11,7 +6,8 @@ namespace Tom.ChineseChess.Sdk
     {
         public static void Main()
         {
-            IClient client = new Tom.Api.Request.DefaultClient(null, null, null, null, null, null, null);
+            var serverUrl = "http://localhost:28310/";
+            IClient client = new DefaultClient(serverUrl, null, null);
         }
     }
 }

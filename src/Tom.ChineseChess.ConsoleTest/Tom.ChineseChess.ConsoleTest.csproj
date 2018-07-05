@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,11 +51,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Tom.Api.Sdk\src\Tom.Api.Sdk\Tom.Api.Sdk.csproj">
+      <Project>{876FD1DB-A45D-4DEB-A9B2-03C1D4F1C373}</Project>
+      <Name>Tom.Api.Sdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tom.ChineseChess.Engine\Tom.ChineseChess.Engine.csproj">
       <Project>{872bee4c-c59e-49d3-821f-fb214d6667fd}</Project>
       <Name>Tom.ChineseChess.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tom.ChineseChess.Sdk\Tom.ChineseChess.Sdk.csproj">
+      <Project>{8a4f0b21-c593-4b9c-ae96-e7c5ac60fc4b}</Project>
+      <Name>Tom.ChineseChess.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

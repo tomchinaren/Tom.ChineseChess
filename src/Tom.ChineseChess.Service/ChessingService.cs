@@ -14,15 +14,24 @@ using Tom.ChineseChess.Service.Util;
 
 namespace Tom.ChineseChess.Service
 {
-    public class ChessingService
+    public class ChessingService: ISetIdentity
     {
         #region 初始化
         private IIdentityContext identity;
-        private ISquare square { get { return this.identity.Square; } }
+        private ISquare square { get { return identity.Square; } }
         private IChessContext chessContext;
+        public IChessContext ChessContext { get { return chessContext; } }
         public ChessingService()
         {
             chessContext = new ChessContext(1, 2, 3);
+        }
+        /// <summary>
+        /// 在业务操作前调用
+        /// </summary>
+        /// <param name="identity"></param>
+        public void SetIdentity(IIdentityContext identity)
+        {
+            this.identity = identity;
         }
         #endregion
 
@@ -30,10 +39,14 @@ namespace Tom.ChineseChess.Service
         {
             var res = new SquareSitResponse();
 
+            //var userID = Utils.GetUserIDByToken(request.Token);
+            //var square = chessContext.Squares[userID];
+
             var tableId = Utils.GetRequestParam<int>(request.BizContent, "table_id");
             var table = chessContext.Tables[tableId];
             square.Sit(table);
 
+            Utils.SetDebugInfo(request, res, square);
             return res;
         }
 
@@ -41,6 +54,7 @@ namespace Tom.ChineseChess.Service
         {
             var res = new SquareReadyResponse();
             square.Ready();
+            Utils.SetDebugInfo(request, res, square);
             return res;
         }
 
@@ -50,12 +64,14 @@ namespace Tom.ChineseChess.Service
 
             var dict = Utils.GetRequestDict(request.BizContent);
             var chessType = Utils.GetRequestParam<ChessType>(dict, "chesstype");
+            int index = Utils.GetRequestParam<int>(dict, "index");
             int relativeX = Utils.GetRequestParam<int>(dict, "relativex");
             int relativeY = Utils.GetRequestParam<int>(dict, "relativey");
 
-            var chess = square.GetChess(chessType);
+            var chess = square.GetChess(chessType, index);
             chess.MoveTo(new ChessPoint(relativeX, relativeY));
 
+            Utils.SetDebugInfo(request, res, square);
             return res;
         }
     }

@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Tom.Api;
+using Tom.Api.Request;
 using Tom.ChineseChess.Sdk.Response;
 
 namespace Tom.ChineseChess.Sdk.Request
 {
-    public class SquareReadyRequest : Tom.Api.Request.IRequest<SquareReadyResponse>
+    public class SquareReadyRequest : IRequest<SquareReadyResponse>
     {
         #region IRequest Members
         private string apiVersion = "1.0";
 		private bool  needEncrypt=false;
         private IObject bizModel;
         public string BizContent { get; set; }
+        public bool Debug { get; set; }
+        public string Session { get; set; }
 
         public string GetApiName()
         {
