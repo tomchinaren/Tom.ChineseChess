@@ -6,6 +6,7 @@ using Tom.Api.Enum;
 using Tom.Api.Request;
 using Tom.Api.Response;
 using Tom.ChineseChess.Engine;
+using Tom.ChineseChess.Engine.Chessing;
 using Tom.ChineseChess.Engine.Exceptions;
 using Tom.ChineseChess.Sdk.Request;
 using Tom.ChineseChess.Service.Context;
@@ -70,20 +71,21 @@ namespace Tom.ChineseChess.Service.Util
             return val;
         }
 
-        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn,TOut> func, ISetIdentity identitySetter, IChessContext chessContext)
+        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn, TOut> func, long userID)
             where TOut: IResponse 
             where TIn: IRequest<TOut>
         {
             var res = Activator.CreateInstance<TOut>();
             try
             {
-                var userID = GetUserIDByToken(request.Session);
-                var square = chessContext.Squares[userID];
-                var identity = new IdentityContext(square, null);
-                identitySetter.SetIdentity(identity);
+                //var userID = GetUserIDByToken(request.Session);
+                //var square = ChessingManager.Instance.Squares[userID];
+                //var identity = new IdentityContext(square, null);
+                //identitySetter.SetIdentity(identity);
 
                 res = func(request);
 
+                var square = ChessingManager.Instance.Squares[userID];
                 SetDebugInfo(request, res, square);
             }
             catch (ChessException ex)

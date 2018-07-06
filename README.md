@@ -6,3 +6,7 @@ api v1.0
 3.chessing.move
 
 --------------------
+ChessingManager represent a state of room,contain which tables and squares.
+Service have no states.
+ChessingManager with static instance have states.controller create service,service run ChessingManager.Init.
+

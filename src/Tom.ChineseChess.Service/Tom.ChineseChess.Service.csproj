@@ -49,6 +49,7 @@
     <Compile Include="Context\IIdentityContext.cs" />
     <Compile Include="Context\ISetIdentity.cs" />
     <Compile Include="Context\IUserInfo.cs" />
+    <Compile Include="Context\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Utils.cs" />
   </ItemGroup>

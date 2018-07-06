@@ -14,24 +14,28 @@ using Tom.ChineseChess.Service.Util;
 
 namespace Tom.ChineseChess.Service
 {
-    public class ChessingService: ISetIdentity
+    public class ChessingService
     {
         #region 初始化
-        private IIdentityContext identity;
-        private ISquare square { get { return identity.Square; } }
-        private IChessContext chessContext;
-        public IChessContext ChessContext { get { return chessContext; } }
-        public ChessingService()
+        private IIdentityContext _identity;
+        private long UserID { get { return _identity.UserInfo.UserID; } }
+        public ISquare Square
         {
-            chessContext = new ChessContext(1, 2, 3);
+            get
+            {
+                if (!ChessingManager.Instance.Squares.Keys.Contains(UserID))
+                {
+                    return null;
+                }
+                return ChessingManager.Instance.Squares[UserID];
+            }
         }
-        /// <summary>
-        /// 在业务操作前调用
-        /// </summary>
-        /// <param name="identity"></param>
-        public void SetIdentity(IIdentityContext identity)
+        //传identity而不直接传userID的原因，是userID可能会变
+        public ChessingService(IIdentityContext identity)
         {
-            this.identity = identity;
+            this._identity = identity;
+            ChessingManager.Init(1, 2, 3);
+
         }
         #endregion
 
@@ -41,9 +45,22 @@ namespace Tom.ChineseChess.Service
 
             //var userID = Utils.GetUserIDByToken(request.Token);
             //var square = chessContext.Squares[userID];
-
             var tableId = Utils.GetRequestParam<int>(request.BizContent, "table_id");
-            var table = chessContext.Tables[tableId];
+            var table = ChessingManager.Instance.Tables[tableId];
+            ISquare square = Square;
+            if (square!=null)
+            {
+                if(square.Table!=null && square.Table!= table)
+                {
+                    throw new Exception(string.Format("Error when user {0} Sit at table {1}, square with other table ", UserID, tableId));
+                }
+            }
+            else
+            {
+                var newCamp = !table.Squares.Keys.Contains(Camp.RedCamp) ? Camp.RedCamp : Camp.BlackCamp;
+                square = new Square(newCamp, newCamp == Camp.RedCamp ? ChessColor.Red : ChessColor.Black);
+                ChessingManager.Instance.Squares.Add(UserID, square);
+            }
             square.Sit(table);
 
             Utils.SetDebugInfo(request, res, square);
@@ -53,8 +70,8 @@ namespace Tom.ChineseChess.Service
         public SquareReadyResponse Ready(SquareReadyRequest request)
         {
             var res = new SquareReadyResponse();
-            square.Ready();
-            Utils.SetDebugInfo(request, res, square);
+            Square.Ready();
+            Utils.SetDebugInfo(request, res, Square);
             return res;
         }
 
@@ -68,10 +85,10 @@ namespace Tom.ChineseChess.Service
             int relativeX = Utils.GetRequestParam<int>(dict, "relativex");
             int relativeY = Utils.GetRequestParam<int>(dict, "relativey");
 
-            var chess = square.GetChess(chessType, index);
+            var chess = Square.GetChess(chessType, index);
             chess.MoveTo(new ChessPoint(relativeX, relativeY));
 
-            Utils.SetDebugInfo(request, res, square);
+            Utils.SetDebugInfo(request, res, Square);
             return res;
         }
     }

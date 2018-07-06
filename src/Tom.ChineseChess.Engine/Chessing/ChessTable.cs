@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tom.ChineseChess.Engine.Enums;
 
 namespace Tom.ChineseChess.Engine
 {
     public class ChessTable: ITable
     {
         private Dictionary<IChessPoint, IChess> _dict = new Dictionary<IChessPoint, IChess>();
+        public Dictionary<Camp, ISquare> _squares = new Dictionary<Camp, ISquare>();
 
         #region ITable
         IChess ITable.this[IChessPoint chessPoint]
@@ -50,11 +52,21 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
+        public Dictionary<Camp, ISquare> Squares { get; }
+
         Dictionary<IChessPoint, IChess> ITable.ChessList
         {
             get
             {
                 return _dict;
+            }
+        }
+
+        Dictionary<Camp, ISquare> ITable.Squares
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -77,6 +89,15 @@ namespace Tom.ChineseChess.Engine
         {
             throw new NotImplementedException();
         }
+        void ITable.AddSquare(ISquare square)
+        {
+            var camp = square.Camp;
+            if (!_squares.Keys.Contains(camp))
+            {
+                _squares.Add(camp, square);
+            }
+        }
+
         #endregion
     }
 }

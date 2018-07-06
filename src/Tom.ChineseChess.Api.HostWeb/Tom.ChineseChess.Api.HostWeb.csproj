@@ -143,6 +143,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChessingController.cs" />
     <Compile Include="Filter\CheckTokenAttribute.cs" />
+    <Compile Include="Filter\ChessingBasicAttribute.cs" />
+    <Compile Include="Filter\IContextContainer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

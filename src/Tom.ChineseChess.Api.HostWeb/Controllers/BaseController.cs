@@ -16,8 +16,10 @@ namespace Tom.ChineseChess.Api.HostWeb.Controllers
     /// 2、获取用户身份
     /// </summary>
     [CheckToken]
-    public class BaseController : ApiController
+    [ChessingBasic]
+    public class BaseController : ApiController, IContextContainer
     {
         public IIdentityContext Identity { get; set; }
+        public long UserID { get { return Identity.UserInfo.UserID; } }
     }
 }

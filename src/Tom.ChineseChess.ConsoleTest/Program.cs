@@ -28,7 +28,7 @@ namespace Tom.ChineseChess.ConsoleTest
                     { "table_id","1"}
                 })
             };
-            var sitRes = client.Execute(sitReq);
+            var sitRes = client.Execute(sitReq,"1");
 
             var readyReq = new SquareReadyRequest();
             var readyRes = client.Execute(readyReq);

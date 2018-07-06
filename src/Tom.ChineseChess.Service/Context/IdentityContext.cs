@@ -31,5 +31,10 @@ namespace Tom.ChineseChess.Service.Context
                 return userInfo;
             }
         }
+
+        public void SetUserInfo(IUserInfo userInfo)
+        {
+            this.userInfo = userInfo;
+        }
     }
 }

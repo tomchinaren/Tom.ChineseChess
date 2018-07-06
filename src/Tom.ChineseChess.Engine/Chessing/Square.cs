@@ -120,8 +120,9 @@ namespace Tom.ChineseChess.Engine
         {
             _flow.Next(SquareState.Sited);
             _table = table;
+            _table.AddSquare(this);
 
-            foreach(var chess in _chessList)
+            foreach (var chess in _chessList)
             {
                 table[chess.CurrentPoint] = chess;
             }

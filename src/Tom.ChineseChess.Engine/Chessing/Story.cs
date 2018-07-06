@@ -82,6 +82,39 @@ namespace Tom.ChineseChess.Engine
 
     }
 
+    /*
+    public class Story : IStory
+    {
+        private long id;
+        public long ID { get; }
+        public ITable Table { get; }
+        private Dictionary<Camp, ISquare> squares;
+        public Dictionary<Camp, ISquare> Squares { get { return squares; } }
+
+        public bool AddSqaure(ISquare square)
+        {
+            if (squares.Keys.Contains(square.Camp))
+            {
+                return false;
+            }
+            squares.Add(square.Camp, square);
+            return true;
+        }
+
+        public Story(long id)
+        {
+            this.id = id;
+        }
+    }
+
+    public interface IStory
+    {
+        long ID { get; }
+        ITable Table { get; }
+        Dictionary<Camp, ISquare> Squares { get; }
+    }
+*/
+
     public interface IChessContext
     {
         Dictionary<long, ITable> Tables { get; }
@@ -119,10 +152,12 @@ namespace Tom.ChineseChess.Engine
         void Stop();
         void Report();
         void Clear();
+        void AddSquare(ISquare square);
 
         IChess this[IChessPoint chessPoint] { get; set; }
         List<IChess> this[int a, int b] { get;}
         Dictionary<IChessPoint, IChess> ChessList { get; }
+        Dictionary<Camp, ISquare> Squares { get; }
     }
 
     public interface ILog

@@ -44,7 +44,7 @@
     <Compile Include="Exceptions\GameLoseException.cs" />
     <Compile Include="background\ImageHelper.cs" />
     <Compile Include="background\Res.cs" />
-    <Compile Include="Chessing\ChessContext.cs" />
+    <Compile Include="Chessing\ChessingManager.cs" />
     <Compile Include="Chessing\Square.cs" />
     <Compile Include="Chessing\Story.cs" />
     <Compile Include="Chess\Cannons.cs" />

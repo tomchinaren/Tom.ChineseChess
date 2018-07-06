@@ -6,5 +6,6 @@ namespace Tom.ChineseChess.Service.Context
     {
         IUserInfo UserInfo { get; }
         ISquare Square { get; }
+        void SetUserInfo(IUserInfo userInfo);
     }
 }
