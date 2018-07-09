@@ -45,7 +45,7 @@ namespace Tom.ChineseChess.Service
 
             //var userID = Utils.GetUserIDByToken(request.Token);
             //var square = chessContext.Squares[userID];
-            var tableId = Utils.GetRequestParam<int>(request.BizContent, "table_id");
+            var tableId = Utils.GetRequestParam<int>(request.Biz_Content, "table_id");
             var table = ChessingManager.Instance.Tables[tableId];
             ISquare square = Square;
             if (square!=null)
@@ -63,7 +63,6 @@ namespace Tom.ChineseChess.Service
             }
             square.Sit(table);
 
-            Utils.SetDebugInfo(request, res, square);
             return res;
         }
 
@@ -71,7 +70,6 @@ namespace Tom.ChineseChess.Service
         {
             var res = new SquareReadyResponse();
             Square.Ready();
-            Utils.SetDebugInfo(request, res, Square);
             return res;
         }
 
@@ -79,7 +77,7 @@ namespace Tom.ChineseChess.Service
         {
             var res = new ChessMoveResponse();
 
-            var dict = Utils.GetRequestDict(request.BizContent);
+            var dict = Utils.GetRequestDict(request.Biz_Content);
             var chessType = Utils.GetRequestParam<ChessType>(dict, "chesstype");
             int index = Utils.GetRequestParam<int>(dict, "index");
             int relativeX = Utils.GetRequestParam<int>(dict, "relativex");
@@ -88,7 +86,6 @@ namespace Tom.ChineseChess.Service
             var chess = Square.GetChess(chessType, index);
             chess.MoveTo(new ChessPoint(relativeX, relativeY));
 
-            Utils.SetDebugInfo(request, res, Square);
             return res;
         }
     }

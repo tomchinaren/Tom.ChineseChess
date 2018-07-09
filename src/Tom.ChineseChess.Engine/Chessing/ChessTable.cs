@@ -52,8 +52,6 @@ namespace Tom.ChineseChess.Engine
             }
         }
 
-        public Dictionary<Camp, ISquare> Squares { get; }
-
         Dictionary<IChessPoint, IChess> ITable.ChessList
         {
             get
@@ -66,7 +64,7 @@ namespace Tom.ChineseChess.Engine
         {
             get
             {
-                throw new NotImplementedException();
+                return _squares;
             }
         }
 

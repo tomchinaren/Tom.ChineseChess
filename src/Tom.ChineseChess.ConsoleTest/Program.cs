@@ -23,7 +23,7 @@ namespace Tom.ChineseChess.ConsoleTest
 
             var sitReq = new SquareSitRequest()
             {
-                BizContent = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, string>()
+                Biz_Content = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, string>()
                 {
                     { "table_id","1"}
                 })
@@ -35,7 +35,7 @@ namespace Tom.ChineseChess.ConsoleTest
 
             var moveReq1 = new ChessMoveRequest()
             {
-                BizContent = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, string>()
+                Biz_Content = Newtonsoft.Json.JsonConvert.SerializeObject(new Dictionary<string, string>()
                 {
                     { "chesstype", ChessType.Cannons.ToString().ToLower()},
                     { "index","0"},

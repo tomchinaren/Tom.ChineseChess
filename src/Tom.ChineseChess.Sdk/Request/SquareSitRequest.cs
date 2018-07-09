@@ -11,11 +11,14 @@ namespace Tom.ChineseChess.Sdk.Request
     /// </summary>
     public class SquareSitRequest : IRequest<SquareSitResponse>
     {
+        public SquareSitRequest()
+        {
+            Version = "1.0";
+        }
         #region IRequest Members
-        private string apiVersion = "1.0";
-		private bool  needEncrypt=false;
+        private bool  needEncrypt=false;
         private IObject bizModel;
-        public string BizContent { get; set; }
+        public string Biz_Content { get; set; }
 
         public bool Debug { get; set; }
         public string Session { get; set; }
@@ -25,14 +28,7 @@ namespace Tom.ChineseChess.Sdk.Request
             return "tom.chinesechess.chessing.sit";
         }
 
-        public string GetApiVersion()
-        {
-            return apiVersion;
-        }
-        public void SetApiVersion(string apiVersion)
-        {
-            this.apiVersion = apiVersion;
-        }
+        public string Version { get; set; }
 
         public bool GetNeedEncrypt()
         {
@@ -58,7 +54,7 @@ namespace Tom.ChineseChess.Sdk.Request
         public IDictionary<string, string> GetParameters()
         {
             ParamDictionary parameters = new ParamDictionary();
-            parameters.Add("biz_content", this.BizContent);
+            parameters.Add("biz_content", this.Biz_Content);
             return parameters;
         }
 

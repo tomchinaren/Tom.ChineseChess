@@ -22,7 +22,7 @@ namespace Tom.ChineseChess.Api.HostWeb.Filter
                 var authToken = GetContent(actionContext);
                 var token = authToken?.Auth_Token;
 
-                var userID = Utils.GetUserIDByToken(token);
+                var userID = 1L;// Utils.GetUserIDByToken(token);
                 if (basic.Identity == null)
                 {
                     basic.Identity = new IdentityContext(null, new UserInfo());

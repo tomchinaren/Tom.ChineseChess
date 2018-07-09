@@ -113,15 +113,15 @@ namespace Tom.ChineseChess.Service.Util
         public static string GetChessListDebugInfo(ISquare square)
         {
             var sb = new StringBuilder();
-            sb.Append(string.Format("-----begin Camp {0}-----", square.Camp));
+            sb.Append(string.Format("-----begin Camp {0}-----\r\n", square.Camp));
 
             var i = 0;
             var list = square.Table.ChessList.Where(t => t.Value.Square == square);
             foreach (var t in list)
             {
-                Console.WriteLine("{0}) {1} {2} {3} {4} {5} {6}", i++, square.Camp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType);
+                sb.Append(string.Format("{0}) {1} {2} {3} {4} {5} {6}\r\n", i++, square.Camp, t.Key.RelativeX, t.Key.RelativeY, t.Key.X, t.Key.Y, t.Value.ChessType));
             }
-            sb.Append(string.Format("-----end Camp {0}-----", square.Camp));
+            sb.Append(string.Format("-----end Camp {0}-----\r\n", square.Camp));
             return sb.ToString();
         }
 
