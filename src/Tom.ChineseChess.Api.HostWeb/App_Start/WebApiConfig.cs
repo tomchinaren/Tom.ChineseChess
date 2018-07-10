@@ -14,6 +14,7 @@ namespace Tom.ChineseChess.Api.HostWeb
 
             #region 请求头MediaType支持（Content-Type:text/html等）
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/x-www-form-urlencoded"));
             #endregion
 
             // Web API 路由

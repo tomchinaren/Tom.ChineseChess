@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.WebSockets;
+using Tom.Api.Request;
+using Tom.ChineseChess.HostWeb.Models;
 
 namespace Tom.ChineseChess.HostWeb.Controllers
 {
@@ -50,6 +52,8 @@ namespace Tom.ChineseChess.HostWeb.Controllers
                     buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(returnMessage));
                     await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
 
+                    RevokeBiz(message);
+
                     await SendToFirst(socket, returnMessage + " to first");
                 }
                 else
@@ -72,5 +76,47 @@ namespace Tom.ChineseChess.HostWeb.Controllers
                 await socketFirst.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
+
+        private void TryRevokeBiz(string msg)
+        {
+            try
+            {
+                RevokeBiz(msg);
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        private void RevokeBiz(string msg)
+        {
+            var serverUrl = "http://localhost.:28310/";
+            IClient client = new DefaultClient(serverUrl, null, null);
+
+            var dtoModel = Newtonsoft.Json.JsonConvert.DeserializeObject<CommandModel>(msg);
+
+            switch (dtoModel.CommandType)
+            {
+                case CommandType.Sit:
+                    {
+                        var req = new Sdk.Request.SquareSitRequest() {
+                             Biz_Content = Newtonsoft.Json.JsonConvert.SerializeObject(dtoModel.Data)
+                        };
+                        var res = client.Execute(req);
+                    }
+                    break;
+
+                case CommandType.Ready:
+                    break;
+
+                case CommandType.Move:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
     }
 }

@@ -38,15 +38,16 @@ namespace Tom.ChineseChess.Api.HostWeb.Filter
             AuthToken authToken = null;
             var task = actionContext.Request.Content.ReadAsStreamAsync();
             var content = string.Empty;
-            using (System.IO.Stream sm = task.Result)
+            //using (System.IO.Stream sm = task.Result)
             {
+                System.IO.Stream sm = task.Result;
                 if (sm != null)
                 {
                     sm.Seek(0, SeekOrigin.Begin);
                     int len = (int)sm.Length;
                     byte[] inputByts = new byte[len];
                     sm.Read(inputByts, 0, len);
-                    sm.Close();
+                    //sm.Close();//close的话后续无法再读
                     content = Encoding.UTF8.GetString(inputByts);
                     content = HttpUtility.UrlDecode(content);
                 }

@@ -112,6 +112,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Tom.Api.Sdk">
+      <HintPath>..\..\output\net45\sdk\Tom.Api.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Tom.ChineseChess.Sdk">
+      <HintPath>..\..\output\net45\sdk\Tom.ChineseChess.Sdk.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -131,6 +137,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommandModel.cs" />
+    <Compile Include="Models\CommandType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WS\IWSHandler.cs" />
     <Compile Include="WS\WSHandler.cs" />
@@ -142,6 +150,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="res\chessing\index.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -175,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

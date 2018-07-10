@@ -4,6 +4,7 @@
     ViewBag.Title = "CIm";
 }
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +12,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title></title>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div>
+        <input type="text" id="tableID" value="1" />
+        <input type="text" id="commandList" value="@ViewBag.commandListJson"/>
+        <input type="button" value="Connect" id="btnConnect" />
+        <input type="button" value="DisConnect" id="btnDisConnect" />
+        <input type="button" value="Sit" id="btnSit" />
+        <input type="button" value="Ready" id="btnReady" />
+        <hr />
+        <input type="text" id="txtInput" />
+        <input type="button" value="Send" id="btnSend" />
+        <br />
+        <span id="messageSpan" style="color:red;"></span>
+    </div>
+
+    <script src="~/res/chessing/index.js"></script>
     <script>
+        Index.Init();
         var ws;
         $().ready(function () {
             $("#btnConnect").click(function () {
@@ -44,16 +63,5 @@
 
         });
     </script>
-</head>
-<body>
-    <div>
-        <input type="button" value="Connect" id="btnConnect" />
-        <input type="button" value="DisConnect" id="btnDisConnect" />
-        <hr />
-        <input type="text" id="txtInput" />
-        <input type="button" value="Send" id="btnSend" />
-        <br />
-        <span id="messageSpan" style="color:red;"></span>
-    </div>
 </body>
 </html>
