@@ -26,5 +26,11 @@ namespace Tom.ChineseChess.HostWeb.Controllers
 
             return View();
         }
+
+
+        public ActionResult Im()
+        {
+            return View();
+        }
     }
 }
