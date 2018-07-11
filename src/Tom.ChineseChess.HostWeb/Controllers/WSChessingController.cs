@@ -52,7 +52,7 @@ namespace Tom.ChineseChess.HostWeb.Controllers
                     buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(returnMessage));
                     await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
 
-                    RevokeBiz(message);
+                    TryRevokeBiz(message);
 
                     await SendToFirst(socket, returnMessage + " to first");
                 }
@@ -83,15 +83,14 @@ namespace Tom.ChineseChess.HostWeb.Controllers
             {
                 RevokeBiz(msg);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
             }
         }
 
         private void RevokeBiz(string msg)
         {
-            var serverUrl = "http://localhost.:28310/";
+            var serverUrl = System.Configuration.ConfigurationManager.AppSettings["ServerUrl"].ToString();
             IClient client = new DefaultClient(serverUrl, null, null);
 
             var dtoModel = Newtonsoft.Json.JsonConvert.DeserializeObject<CommandModel>(msg);
