@@ -5,9 +5,10 @@ using System.Web;
 
 namespace Tom.ChineseChess.HostWeb.Models
 {
-    public class CommandModel
+    public class UIMessageModel
     {
-        public CommandType CommandType { get; set; }
+        public UIMessageType UIMessageType { get; set; }
+        public ActionType ActionType { get; set; }
         public string ApiName { get; set; }
         public Dictionary<string, string> Data { get; set; }
     }

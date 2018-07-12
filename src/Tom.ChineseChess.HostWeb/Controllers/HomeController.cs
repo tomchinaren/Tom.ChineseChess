@@ -39,9 +39,9 @@ namespace Tom.ChineseChess.HostWeb.Controllers
         private string GetCommandListJson()
         {
             var list = new Dictionary<string, string> {
-                { CommandType.Sit.ToString().ToLower(),new Sdk.Request.SquareSitRequest().GetApiName()},
-                {  CommandType.Ready.ToString().ToLower(),new Sdk.Request.SquareReadyRequest().GetApiName()},
-                {  CommandType.Move.ToString().ToLower(),new Sdk.Request.ChessMoveRequest().GetApiName()},
+                { ActionType.Sit.ToString().ToLower(),new Sdk.Request.SquareSitRequest().GetApiName()},
+                {  ActionType.Ready.ToString().ToLower(),new Sdk.Request.SquareReadyRequest().GetApiName()},
+                {  ActionType.Move.ToString().ToLower(),new Sdk.Request.ChessMoveRequest().GetApiName()},
             };
             return Newtonsoft.Json.JsonConvert.SerializeObject(list);
         }

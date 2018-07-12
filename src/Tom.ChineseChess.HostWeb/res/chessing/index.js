@@ -6,6 +6,7 @@
 
         $("#btnSit").click(function () {
             var commandModel = {
+                UIMessageType:2,
                 CommandType:"sit",
                 ApiName : commandList["sit"],
                 Data: {

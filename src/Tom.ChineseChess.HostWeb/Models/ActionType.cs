@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Tom.ChineseChess.HostWeb.Models
 {
-    public enum CommandType
+    public enum ActionType
     {
         Sit =1,
         Ready = 2,

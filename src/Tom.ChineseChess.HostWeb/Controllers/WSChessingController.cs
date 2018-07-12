@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.WebSockets;
 using Tom.Api.Request;
+using Tom.Api.Response;
 using Tom.ChineseChess.HostWeb.Models;
 
 namespace Tom.ChineseChess.HostWeb.Controllers
@@ -52,7 +53,7 @@ namespace Tom.ChineseChess.HostWeb.Controllers
                     buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(returnMessage));
                     await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
 
-                    TryRevokeBiz(message);
+                    var response = TryRevokeBiz(message);
 
                     await SendToFirst(socket, returnMessage + " to first");
                 }
@@ -77,44 +78,50 @@ namespace Tom.ChineseChess.HostWeb.Controllers
             }
         }
 
-        private void TryRevokeBiz(string msg)
+        private IResponse TryRevokeBiz(string msg)
         {
+            IResponse response = null;
             try
             {
-                RevokeBiz(msg);
+                response = RevokeBiz(msg);
             }
             catch (Exception ex)
             {
             }
+            return response;
         }
 
-        private void RevokeBiz(string msg)
+        private IResponse RevokeBiz(string msg)
         {
+            IResponse response = null;
+
             var serverUrl = System.Configuration.ConfigurationManager.AppSettings["ServerUrl"].ToString();
             IClient client = new DefaultClient(serverUrl, null, null);
 
-            var dtoModel = Newtonsoft.Json.JsonConvert.DeserializeObject<CommandModel>(msg);
+            var dtoModel = Newtonsoft.Json.JsonConvert.DeserializeObject<UIMessageModel>(msg);
 
-            switch (dtoModel.CommandType)
+            switch (dtoModel.ActionType)
             {
-                case CommandType.Sit:
+                case ActionType.Sit:
                     {
                         var req = new Sdk.Request.SquareSitRequest() {
                              Biz_Content = Newtonsoft.Json.JsonConvert.SerializeObject(dtoModel.Data)
                         };
-                        var res = client.Execute(req);
+                        response = client.Execute(req);
                     }
                     break;
 
-                case CommandType.Ready:
+                case ActionType.Ready:
                     break;
 
-                case CommandType.Move:
+                case ActionType.Move:
                     break;
 
                 default:
                     break;
             }
+
+            return response;
         }
 
     }
