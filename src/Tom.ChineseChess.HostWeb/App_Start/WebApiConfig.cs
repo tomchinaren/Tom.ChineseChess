@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
 
-namespace Tom.ChineseChess.Api.HostWeb
+namespace Tom.ChineseChess.HostWeb
 {
     public static class WebApiConfig
     {
@@ -12,21 +13,17 @@ namespace Tom.ChineseChess.Api.HostWeb
         {
             // Web API 配置和服务
 
-            #region 请求头MediaType支持（Content-Type:text/html等）
+            // 默认返回Json数据
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/x-www-form-urlencoded"));
-            #endregion
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
-            #region 自定义路由
             config.Routes.MapHttpRoute(
-                name: "MyApi",
-                routeTemplate: "{controller}/{action}/{id}",
+                name: "DefaultApix",
+                routeTemplate: "api/WSChessing/{action}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            #endregion
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -34,5 +31,7 @@ namespace Tom.ChineseChess.Api.HostWeb
                 defaults: new { id = RouteParameter.Optional }
             );
         }
+
     }
+
 }

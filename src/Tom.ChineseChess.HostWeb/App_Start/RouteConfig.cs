@@ -18,6 +18,8 @@ namespace Tom.ChineseChess.HostWeb
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

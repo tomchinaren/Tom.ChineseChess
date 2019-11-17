@@ -71,7 +71,7 @@ namespace Tom.ChineseChess.Service.Util
             return val;
         }
 
-        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn, TOut> func, long userID)
+        public static TOut TryGetResponse<TIn,TOut>(TIn request, Func<TIn, TOut> func, long userID, bool check=true)
             where TOut: IResponse 
             where TIn: IRequest<TOut>
         {
@@ -82,6 +82,18 @@ namespace Tom.ChineseChess.Service.Util
                 //var square = ChessingManager.Instance.Squares[userID];
                 //var identity = new IdentityContext(square, null);
                 //identitySetter.SetIdentity(identity);
+
+                if (check)
+                {
+                    if (string.IsNullOrEmpty(request.Biz_Content))
+                    {
+                        throw new Exception("request参数为空");
+                    }
+                    if (string.IsNullOrEmpty(request.Biz_Content))
+                    {
+                        throw new Exception("biz_content参数为空");
+                    }
+                }
 
                 res = func(request);
 
